@@ -14,5 +14,6 @@ rvm:
   - 2.4.1
   - ruby-head
   - rbx-3
+  - rake
 
 script : mvn rubocop
