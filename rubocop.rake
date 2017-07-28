@@ -1,1 +1,1 @@
-bundle exec rake ci:rubocop
+rake ci: rubocop
