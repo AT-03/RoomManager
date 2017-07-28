@@ -1,0 +1,18 @@
+#Daniel Cabero
+
+sudo: false
+cache: bundler
+language: ruby
+dist: trusty
+
+rvm:
+  - jruby-9.0.1.0
+  - 2.0.0
+  - 2.1.10
+  - 2.2.7
+  - 2.3.4
+  - 2.4.1
+  - ruby-head
+  - rbx-3
+
+script : mvn rubocop
