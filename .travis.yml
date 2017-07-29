@@ -1,19 +1,29 @@
 #Daniel Cabero
 
-sudo: false
-cache: bundler
 language: ruby
-dist: trusty
-
+before_install:
+  - rvm get head
+  - gem install bundler
 rvm:
-  - jruby-9.0.1.0
+  - 1.9.3
   - 2.0.0
   - 2.1.10
   - 2.2.7
   - 2.3.4
   - 2.4.1
   - ruby-head
-  - rbx-3
-  - rake
+  - rbx-2
+  - jruby-1.7.26
+  - jruby-9.1.9.0
 
-script : mvn rubocop
+script: rake
+matrix:
+  allow_failures:
+    - rvm: jruby-1.7.26
+    - rvm: jruby-9.1.9.0
+    - rvm: rbx-2
+
+# configure notifications (email, IRC, campfire etc)
+notifications:
+        on_success: always
+        on_failure: always
