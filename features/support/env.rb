@@ -23,15 +23,15 @@ def load_app_config_file(filename)
 end
 
 
-AfterConfiguration do |configuration|
+def AfterConfiguration  config
   # read config file
-  configuration = load_app_config_file('env.yml')
-  # Load application configuration parameters
-  $app_user = configuration['app']['admin_user']
-  $app_pass = configuration['app']['admin_pass']
-  $app_host = configuration['app']['host']
-  $app_port = configuration['app']['port']
-  $app_root = configuration['app']['rootPath']
-  $app_Exchange = configuration['app']['Exchange-Credentials']
-  $app_Credentials = configuration['app']['Credentials']
+  config = load_app_config_file('env.yml')
+  # Load application config parameters
+  $app_user = config['app']['admin_user']
+  $app_pass = config['app']['admin_pass']
+  $app_host = config['app']['host']
+  $app_port = config['app']['port']
+  $app_root = config['app']['rootPath']
+  $app_Exchange = config['app']['Exchange-Credentials']
+  $app_Credentials = config['app']['Credentials']
 end

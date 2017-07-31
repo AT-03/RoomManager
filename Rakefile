@@ -1,38 +1,28 @@
-
-require 'rubocop/rake_task'
 require 'bundler/gem_tasks'
-require 'rake/testtask'
+require 'rspec/core/rake_task'
 
-  namespace :ci do
+RSpec::Core::RakeTask.new(:spec)
 
+task :smoke do
+  exec "spec/smoke"
+end
 
-  def changed_files
-    cmd = %q( git diff --name-only --diff-filter=ACMRTUXB \
-      $(git merge-base HEAD master) \
-      | egrep '\.rake$|\.rb$' )
-    diff = `#{cmd}`
-    diff.split("\n")
-  end
+namespace :dummy do
+  require_relative "features/support/env"
+end
 
-  def patterns_for_changed_files
-    # always include the ci.rake file, if the patterns is empty it runs everything.
-    W patterns = ['rake_taks.rake']
-    patterns += changed_files
-  end
+task(:spec).clear
+desc "Run specs other than spec/acceptance"
+RSpec::Core::RakeTask.new("spec") do |task|
+  task.exclude_pattern = "spec/acceptance/**/*_spec.rb"
+  task.verbose = false
+end
 
-  desc 'Run RuboCop on the entire project'
-  RuboCop::RakeTask.new('rubocop') do |task|
-    task.fail_on_error = true
-  end
+desc "Run acceptance specs in spec/acceptance"
+RSpec::Core::RakeTask.new("spec:acceptance") do |task|
+  task.pattern = "spec/acceptance/**/*_spec.rb"
+  task.verbose = false
+end
 
-  desc 'Run RuboCop on the project based on git diff'
-  RuboCop::RakeTask.new('rubocop_changed') do |task|
-    task.patterns = patterns_for_changed_files
-    task.fail_on_error = true
-  end
-
-  RSpec::Core::RakeTask.new
-  task :default => :spec
-
-  end
-
+desc "Run the specs and acceptance tests"
+task default: %w(spec spec:acceptance)
