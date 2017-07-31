@@ -2,7 +2,7 @@ require_relative '../../../request_manager'
 require 'json'
 require_relative '../../../helper'
 
-
+# test configuration travis
 $request= RequestManager
 
 When(/^I GET request of services$/) do

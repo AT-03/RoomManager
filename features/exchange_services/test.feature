@@ -1,5 +1,6 @@
 Feature: test
 
+  test for configuration of the travis
   Scenario: test get
     * I GET request of services
     * I POST request of services:
