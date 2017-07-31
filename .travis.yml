@@ -1,16 +1,19 @@
 
- language: ruby
+language:
+  ruby
  rvm:
-   - 1.9.3
-   - 2.0.0
-   - 2.1.10
-   - 2.2.7
-   - 2.3.4
-   - 2.4.1
-   - ruby-head
+    - 1.9.3
+     - 2.0
+    - 2.1
+    - 2.2.6
+    - 2.3.3
+    - 2.4.0
 
-   before_install:
-      - rvm get head
-      - gem install bundler
-      - gem install rubocop
-      - rubocop
+  -sudo: false # route your build to the container-based infrastructure for a faster build
+  before_install:
+ - sudo apt-get update -qq
+  - sudo apt-get install -y libgsl0-dev
+  - gem update bundler
+  - bundle install
+  - bundle exec rake compile
+  - bundle exec rake teste container-based infrastructure for a faster build
