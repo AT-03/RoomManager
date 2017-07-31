@@ -9,6 +9,7 @@ end
 
 namespace :dummy do
   require_relative "features/support/env"
+
 end
 
 task(:spec).clear
