@@ -160,7 +160,6 @@ DEPENDENCIES
   faker
   growl
   guard-rspec
-  rest-client
   rb-fsevent
   rspec
   rspec-rails
