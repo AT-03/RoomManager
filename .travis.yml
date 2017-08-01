@@ -8,7 +8,7 @@ language:
    - sudo apt-get update -qq
    - sudo apt-get install -y libgsl0-dev
    - gem update bundler
-  - gem install rubocop
-  - rubocop
-  - gem install reek
-  - reek
+   - gem install rubocop
+   - rubocop
+   - gem install reek
+   - reek
