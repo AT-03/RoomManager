@@ -5,7 +5,6 @@ gem 'rubocop'
 
 group :development do
   gem 'faker'
-  gem 'rest-client'
   gem 'rspec-rails'
 end
 group :test do
