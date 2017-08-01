@@ -8,7 +8,9 @@ begin
 end
 
 task :spec do
-  Rake::Task[:spec_prep].invoke
-  Rake::Task[:spec_standalone].invoke
-  Rake::Task[:spec_clean].invoke
-end
+  Rake::Task[:spec].invoke
+ end
+
+task(:default).clear
+
+task :default => [:spec]
