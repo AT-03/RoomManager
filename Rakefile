@@ -9,8 +9,8 @@ end
 
 task :spec do
   Rake::Task[:spec].invoke
- end
+end
 
 task(:default).clear
 
-task :default => [:spec]
+task default: :spec
