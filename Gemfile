@@ -1,23 +1,20 @@
 source 'https://rubygems.org'
 
-@gemspec
-
-gem 'rubocop'
-gem 'bundle'
 gem 'bundler'
-gem 'rspec'
-gem 'json'
 gem 'json-schema'
 gem 'json_spec'
+gem 'rspec'
+gem 'rubocop'
 
 group :development do
-  gem 'rspec-rails'
   gem 'faker'
+  gem 'rspec-rails'
 end
 group :test do
-  gem "factory_girl_rails"
-  gem "capybara"
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'growl'
   gem 'guard-rspec'
   gem 'rb-fsevent'
-  gem 'growl'
 end
+@gemspec
