@@ -10,8 +10,6 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y libgsl0-dev
   - gem update bundler
-  - gem install rest-client
   - gem install rubocop
-  - bundle install
   - rubocop
   
