@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'bundler'
-gem 'json-schema'
-gem 'json_spec'
 gem 'rspec'
 gem 'rubocop'
 
