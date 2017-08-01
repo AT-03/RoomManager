@@ -12,5 +12,4 @@ before_install:
   - gem update bundler
   - gem install rubocop
   - rubocop
-  - gem install reek
-  - reek
+  
