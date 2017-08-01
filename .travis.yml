@@ -12,5 +12,6 @@ before_install:
   - gem update bundler
   - gem install rest-client
   - gem install rubocop
+  - bundle install
   - rubocop
   
