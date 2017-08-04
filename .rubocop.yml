@@ -1,0 +1,10 @@
+# juan aitken
+AllCops:
+  Include:
+    - '**/Rakefile'
+
+  Exclude:
+    - 'features/**/*'
+    - 'lib/**/*'
+    - 'script/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/

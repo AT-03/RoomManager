@@ -15,6 +15,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '2.8.3'
   spec.add_dependency 'activerecord', '>= 4.0.0'
   spec.add_dependency 'railties', '>= 4.0.0'
+  spec.add_dependency 'cucumber-rails'
+
 
   spec.required_ruby_version = '~> 2.3'
 end

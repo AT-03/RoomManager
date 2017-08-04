@@ -2,8 +2,10 @@ source 'https://rubygems.org'
 
 gem 'rspec'
 gem 'rubocop'
+gem 'rest-client'
 
 group :development do
+  gem 'cucumber-rails', :require => false
   gem 'faker'
   gem 'rspec-rails'
 end
