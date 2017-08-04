@@ -1,5 +1,3 @@
-require 'rest-client'
-
 # Request Manager class.
 # Author: Pablo Ramirez, Daniel Montecinos.
 module RequestManager
