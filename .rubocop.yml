@@ -1,4 +1,3 @@
-# juan aitken
 AllCops:
   Include:
     - '**/Rakefile'
@@ -6,5 +5,5 @@ AllCops:
   Exclude:
     - 'features/**/*'
     - 'lib/**/*'
-    - 'script/**/*'
-    - !ruby/regexp /old_and_unused\.rb$/
+    - 'Rakefile'
+
