@@ -1,6 +1,0 @@
----
-BUNDLE_PATH: "vendor/bundle"
-BUNDLE_DISABLE_SHARED_GEMS: "true"
-BUNDLE_WITHOUT: "development:test"
-BUNDLE_FROZEN: "1"
-BUNDLE_JOBS: "4"
