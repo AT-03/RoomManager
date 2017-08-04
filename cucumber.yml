@@ -1,0 +1,1 @@
+default: --format PrettyFace::Formatter::Html --out index.html
