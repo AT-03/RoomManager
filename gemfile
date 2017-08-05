@@ -6,6 +6,7 @@ gem 'rest-client'
 gem 'rspec'
 gem 'rubocop'
 gem 'rest-client'
+gem 'rspec'
 
 group :development do
   gem 'cucumber-rails', :require => false

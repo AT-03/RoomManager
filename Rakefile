@@ -38,3 +38,11 @@ task :@functional do
     sh 'cucumber --tags @functional --format PrettyFace::Formatter::Html --out test_report/functional.html'
   end
 end
+
+task :spec do
+  Rake::Task[:spec].invoke
+end
+
+task(:default).clear
+
+task default: :spec
