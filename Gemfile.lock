@@ -110,6 +110,7 @@ GEM
     parallel (1.12.0)
     parser (2.4.0.0)
       ast (~> 2.2)
+    power_assert (1.0.2)
     powerpack (0.1.1)
     pretty_face (0.10.3)
       actionpack (>= 3.2.13)
@@ -182,6 +183,8 @@ GEM
     shellany (0.0.1)
     slop (3.6.0)
     syntax (1.2.2)
+    test-unit (3.2.5)
+      power_assert
     thor (0.19.4)
     thread_safe (0.3.6)
     tzinfo (1.2.3)
@@ -211,6 +214,7 @@ DEPENDENCIES
   rspec
   rspec-rails
   rubocop
+  test-unit
 
 BUNDLED WITH
    1.15.3
