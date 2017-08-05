@@ -37,10 +37,9 @@ task :@functional do
   end
 end
 
-task :spec do
+task :default do
   Rake::Task[:spec].invoke
+  task(:default).clear
+
+  task default: :spec
 end
-
-task(:default).clear
-
-task default: :spec
