@@ -1,12 +1,12 @@
 # Cabero Daniel
 
 require 'bundler/gem_tasks'
-require 'rspec/core/rake_task'
 require 'cucumber'
 require 'cucumber/rake/task'
 require 'rspec'
 
 task :default do
+  require 'rspec/core/rake_task'
   RSpec::Core::RakeTask.new
   task :default => :spec
   puts 'passed'
