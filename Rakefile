@@ -1,6 +1,6 @@
 # Cabero Daniel
 
-begin
+task :spec do
   require 'bundler/gem_tasks'
   require 'rubygems'
   require 'rspec/core/rake_task'
@@ -8,10 +8,7 @@ begin
   RSpec::Core::RakeTask.new(:spec)
   task default: :spec
 end
-
-task :spec do
   Rake::Task[:spec].invoke
-end
 
 task(:default).clear
 
