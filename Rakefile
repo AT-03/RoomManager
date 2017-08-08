@@ -7,10 +7,7 @@ require 'cucumber/rake/task'
 require 'rspec'
 
 task :default do
-  Rake::Task[:spec].invoke
-  task(:default).clear
-
-  task default: :spec
+   task default: :spec
 end
 
 task :@cucumber do
