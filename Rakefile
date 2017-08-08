@@ -7,8 +7,9 @@ task :spec do
   require 'rspec/core'
   RSpec::Core::RakeTask.new(:spec)
   task default: :spec
-end
   Rake::Task[:spec].invoke
+
+end
 
 task(:default).clear
 
