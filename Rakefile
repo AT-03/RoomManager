@@ -4,8 +4,9 @@
 task :default do
   require 'bundler/gem_tasks'
   require 'rspec/core/rake_task'
-    require 'rspec'
+  require 'rspec'
   RSpec::Core::RakeTask.new
+  Rake::Task['@cucumber'].invoke
   task :default => :spec
   puts 'paseed'
 end
