@@ -2,16 +2,22 @@
 source 'https://rubygems.org'
 
 gem 'pretty_face', '~> 0.10.3'
+gem 'rake'
+gem 'rest-client'
+gem 'rspec-core'
+gem 'rubocop'
 gem 'rest-client'
 gem 'rspec'
-gem 'rubocop'
+gem 'test-unit'
 
 group :development do
+
   gem 'faker'
   gem 'rspec-rails'
 end
 group :test do
   gem 'capybara'
+  gem 'cucumber-rails', :require => false
   gem 'factory_girl_rails'
   gem 'growl'
   gem 'guard-rspec'

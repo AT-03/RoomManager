@@ -1,0 +1,2 @@
+
+rake ci: rubocop
