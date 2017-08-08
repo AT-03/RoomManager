@@ -7,8 +7,9 @@ require 'cucumber/rake/task'
 require 'rspec'
 
 task :default do
-  task :default => :spec
   RSpec::Core::RakeTask.new
+  task :default => :spec
+  puts 'passed'
 end
 
 task :@cucumber do

@@ -209,6 +209,7 @@ DEPENDENCIES
   growl
   guard-rspec
   pretty_face (~> 0.10.3)
+  rake
   rb-fsevent
   rest-client
   rspec
