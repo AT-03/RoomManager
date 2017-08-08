@@ -3,8 +3,8 @@
 task :spec do
   require 'bundler/gem_tasks'
   require 'rubygems'
-  require 'rspec/core/rake_task'
   require 'rspec/core'
+  require 'rspec/core/rake_task'
   RSpec::Core::RakeTask.new(:spec)
   task default: :spec
   Rake::Task[:spec].invoke
