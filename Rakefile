@@ -2,7 +2,6 @@
 
 begin
   require 'rubygems'
-    require 'rspec/core'
   RSpec::Core::RakeTask.new(:spec)
   task default: :spec
 end
