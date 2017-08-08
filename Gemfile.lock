@@ -213,6 +213,7 @@ DEPENDENCIES
   rb-fsevent
   rest-client
   rspec
+  rspec-core
   rspec-rails
   rubocop
   test-unit
