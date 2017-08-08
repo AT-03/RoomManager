@@ -9,6 +9,8 @@ rvm:
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y libgsl0-dev
+  - bundle install
+  - bundle update
   - gem update bundler
   - gem install rubocop
   - rubocop
