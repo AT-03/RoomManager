@@ -1,15 +1,19 @@
 # Cabero Daniel
 
 
-task :default do
-  require 'bundler/gem_tasks'
+begin
   require 'rspec/core/rake_task'
-  require 'rspec'
-  RSpec::Core::RakeTask.new
-  Rake::Task['@cucumber'].invoke
-  task :default => :spec
-  puts 'paseed'
+  RSpec::Core::RakeTask.new(:spec)
+  task default: :spec
 end
+
+task :spec do
+  Rake::Task[:spec].invoke
+end
+
+task(:default).clear
+
+task default: :spec
 
 task :@cucumber do
   require 'bundler/gem_tasks'
