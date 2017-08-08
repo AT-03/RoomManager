@@ -1,9 +1,7 @@
 # Cabero Daniel
 
 require 'bundler/gem_tasks'
-require 'rspec/core/rake_task'
 require 'cucumber'
-require 'cucumber/rake/task'
 
 task :@cucumber do
   Cucumber::Rake::Task.new :features do |t|
@@ -37,4 +35,11 @@ task :@functional do
     t.profile = 'default'
     sh 'cucumber --tags @functional --format PrettyFace::Formatter::Html --out test_report/functional.html'
   end
+end
+
+task :default do
+  Rake::Task[:spec].invoke
+  task(:default).clear
+
+  task default: :spec
 end

@@ -6,14 +6,17 @@ gem 'rest-client'
 gem 'rspec'
 gem 'rubocop'
 gem 'rest-client'
+gem 'rspec'
+gem 'test-unit'
 
 group :development do
-  gem 'cucumber-rails', :require => false
+
   gem 'faker'
   gem 'rspec-rails'
 end
 group :test do
   gem 'capybara'
+  gem 'cucumber-rails', :require => false
   gem 'factory_girl_rails'
   gem 'growl'
   gem 'guard-rspec'
