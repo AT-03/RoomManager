@@ -1,8 +1,6 @@
 # Cabero Daniel
 
 require 'bundler/gem_tasks'
-require 'cucumber'
-require 'cucumber/rake/task'
 require 'rspec'
 
 task :default do
@@ -13,6 +11,8 @@ task :default do
 end
 
 task :@cucumber do
+  require 'cucumber'
+  require 'cucumber/rake/task'
   Cucumber::Rake::Task.new :features do |t|
     t.profile = 'default'
     t.cucumber_opts = 'features'
@@ -20,6 +20,8 @@ task :@cucumber do
   end
 end
 task :@all do
+  require 'cucumber'
+  require 'cucumber/rake/task'
   Cucumber::Rake::Task.new :all do |t|
     t.profile = 'default'
     sh 'cucumber --format PrettyFace::Formatter::Html --out test_report/all.html'
@@ -27,6 +29,8 @@ task :@all do
 end
 
 task :@smoke do
+  require 'cucumber'
+  require 'cucumber/rake/task'
   Cucumber::Rake::Task.new :smoke do |t|
     t.profile = 'default'
     sh 'cucumber --tags @smoke --format PrettyFace::Formatter::Html --out test_report/smoke.html'
@@ -40,6 +44,8 @@ task :@crud do
   end
 end
 task :@functional do
+  require 'cucumber'
+  require 'cucumber/rake/task'
   Cucumber::Rake::Task.new :functional do |t|
     t.profile = 'default'
     sh 'cucumber --tags @functional --format PrettyFace::Formatter::Html --out test_report/functional.html'
