@@ -1,7 +1,17 @@
 # Cabero Daniel
 
 require 'bundler/gem_tasks'
+require 'rspec/core/rake_task'
 require 'cucumber'
+require 'cucumber/rake/task'
+require 'rspec'
+
+task :default do
+  Rake::Task[:spec].invoke
+  task(:default).clear
+
+  task default: :spec
+end
 
 task :@cucumber do
   Cucumber::Rake::Task.new :features do |t|
@@ -37,9 +47,4 @@ task :@functional do
   end
 end
 
-task :default do
-  Rake::Task[:spec].invoke
-  task(:default).clear
 
-  task default: :spec
-end

@@ -1,3 +1,0 @@
-https://coderwall.com/p/bo9q7g/add-rubocop-in-rake
-
-https://www.google.com/search?q=rubocop+rake+task&oq=rubocop+rake+task&aqs=chrome..69i57j0.8505j0j7&sourceid=chrome&ie=UTF-8
