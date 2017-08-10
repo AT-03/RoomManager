@@ -1,23 +1,20 @@
-
 require 'json'
 require_relative 'helper'
-require_relative '../../../features/support/env'
+# require_relative '../../../../features/support/env'
+
 # HttpRequest class.
 # Author: Daniel Montecinos, Pablo Ramirez.
 class HttpRequest
   attr_reader :header, :body, :method, :url
 
   def initialize(endpoint)
-    # user = 'Administrator'
-    # password = 'P@ssw0rd'
-    user=Env.user_password
+    user = Env.user_password
     credentials = Helper.encode_credentials(user)
-    puts "#{credentials}"
 
     @endpoint = endpoint
     @header = {
         :'Content-Type' => 'application/json',
-        :'Credentials' => credentials
+        Credentials: credentials
     }
     @body = {}
     @method = 'get'
@@ -36,7 +33,7 @@ class HttpRequest
   end
 
   def add_body(body)
-    @body = eval(body)
+    @body = Helper.parse_to_json(body)
   end
 
   def add_method(method)
@@ -46,6 +43,5 @@ class HttpRequest
   def build_url
     base_url = @header.key?('Exchange-Calendar') ? Env.exchanges : Env.room
     @url = "#{base_url}#{@endpoint}"
-    puts @url
   end
 end

@@ -1,5 +1,11 @@
 require 'pathname'
 require 'yaml'
+require 'json_spec/cucumber'
+
+def last_json
+  @json
+end
+
 class Env
 
 def load_file
