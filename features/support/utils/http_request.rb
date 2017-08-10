@@ -1,17 +1,34 @@
+
+require 'json'
+require_relative 'helper'
+require_relative '../../../features/support/env'
 # HttpRequest class.
 # Author: Daniel Montecinos, Pablo Ramirez.
 class HttpRequest
   attr_reader :header, :body, :method, :url
 
   def initialize(endpoint)
+    # user = 'Administrator'
+    # password = 'P@ssw0rd'
+    user=Env.user_password
+    credentials = Helper.encode_credentials(user)
+    puts "#{credentials}"
+
     @endpoint = endpoint
-    @header = {}
+    @header = {
+        :'Content-Type' => 'application/json',
+        :'Credentials' => credentials
+    }
     @body = {}
     @method = 'get'
   end
 
+  # Daniel Montecinos
+  # Use this method if you want to change the values set by default.
   def add_header_field(key, value)
-    @header.store(key.downcase.to_sym, value)
+    @header.delete_if {|k| key.end_with?(k.to_s) || key.equal?(k.to_s)}
+
+    @header.store(key, value)
   end
 
   def add_header_query(query = {})
@@ -19,7 +36,7 @@ class HttpRequest
   end
 
   def add_body(body)
-    @body = body
+    @body = eval(body)
   end
 
   def add_method(method)
@@ -27,10 +44,8 @@ class HttpRequest
   end
 
   def build_url
-    es_url = 'http://localhost:3000/api/v1'
-    rm_url = 'http://localhost:7070/api/v1'
-
-    base_url = @header.key?('exchange-calendar'.to_sym) ? es_url : rm_url
-    @url = "#{base_url}/#{@endpoint}"
+    base_url = @header.key?('Exchange-Calendar') ? Env.exchanges : Env.room
+    @url = "#{base_url}#{@endpoint}"
+    puts @url
   end
 end

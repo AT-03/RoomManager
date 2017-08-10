@@ -13,6 +13,22 @@ class Helper
   end
 
   def self.encode_credentials(credentials)
-    Base64.encode64(credentials)
+    Base64.encode64("#{credentials}")
+  end
+
+  # Daniel Montecinos
+  def self.build_endpoint(endpoint, key = '', response = {})
+    if endpoint.include?('{')
+      condition = eval(response.body).key?(key.to_sym)
+      value = condition ? eval(response.body)[key.to_sym] : ''
+
+      return endpoint.gsub(/\{\w+\}/, value)
+    end
+    endpoint
+  end
+
+  # Daniel Montecinos
+  def self.get_value(key, response_body)
+    eval(response_body)[key.to_sym]
   end
 end
