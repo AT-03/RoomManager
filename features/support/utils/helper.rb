@@ -9,18 +9,18 @@ class Helper
   end
 
   def self.get_json_value(json, key)
-    JSON.parse(json).fetch(key)
+    parse_to_json(json).fetch(key)
   end
 
-  def self.encode_credentials(credentials)
-    Base64.encode64("#{credentials}")
+  def self.encode_credentials(user)
+    Base64.encode64(user)
   end
 
   # Daniel Montecinos
   def self.build_endpoint(endpoint, key = '', response = {})
     if endpoint.include?('{')
-      condition = eval(response.body).key?(key.to_sym)
-      value = condition ? eval(response.body)[key.to_sym] : ''
+      condition = parse_to_json(response.body).key?(key)
+      value = condition ? parse_to_json(response.body)[key] : ''
 
       return endpoint.gsub(/\{\w+\}/, value)
     end
@@ -29,6 +29,11 @@ class Helper
 
   # Daniel Montecinos
   def self.get_value(key, response_body)
-    eval(response_body)[key.to_sym]
+    parse_to_json(response_body)[key]
+  end
+
+  # Daniel Montecinos
+  def self.parse_to_json(object)
+    JSON.parse(object)
   end
 end
