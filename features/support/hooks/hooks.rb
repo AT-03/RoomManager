@@ -57,6 +57,11 @@ After('@deleteServices') do
   @db_rm.drop 'services'
 end
 
+# Delete rooms
+Before('@deleteRooms') do
+  @db_rm.drop 'rooms'
+end
+
 def method_name(body, endpoint, method)
   @http = HttpRequest.new("/#{endpoint}")
   @http.add_body(body.to_json)

@@ -37,4 +37,8 @@ class Helper
   def self.parse_to_json(object)
     JSON.parse(object)
   end
+
+  def self.time_sleep
+    sleep Env.time_sleep
+  end
 end
