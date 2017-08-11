@@ -14,7 +14,7 @@ And(/^I set this queries:$/) do |queries|
 end
 
 And(/^I set this headers:$/) do |headers|
-  headers.rows_hash.each {|key, value| @http.add_header_field(key, value)}
+  headers.rows_hash.each { |key, value| @http.add_header_field(key, value)}
 end
 
 When(/^I execute the request$/) do
@@ -32,7 +32,6 @@ end
 
 And(/^I set this body:$/) do |json|
   @http.add_body(json)
-  @body = json
 end
 
 Then(/^I store the '(_?\w+)' as '(?:.+)'$/) do |key|

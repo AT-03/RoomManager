@@ -12,3 +12,4 @@ Feature: SMOKE, GET request to all meetings
       """
         []
       """
+     
