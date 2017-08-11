@@ -28,7 +28,7 @@ Feature: CRUD - Update an existing meeting
         And I set this body:
           """
             {
-              "organizer": "agony@arabitpro.local",
+              "organizer": "RMONE@arabitpro.local",
               "subject": "Subject Updated",
               "body": "Body Updated",
               "start": "2019-03-01T21:00:00.000Z",
@@ -45,9 +45,9 @@ Feature: CRUD - Update an existing meeting
     Then I expect a '200' status code
       And the '_id' value of the response body should remain unchanged
       And the JSON should have the following:
-        | organizer         | "agony@arabitpro.local"    |
+        | organizer         | "RMONE@arabitpro.local"    |
         | subject           | "Subject Updated"          |
-        | owner             | "agony@arabitpro.local"    |
+        | owner             | "RMONE@arabitpro.local"    |
         | start             | "2019-03-01T21:00:00.000Z" |
         | end               | "2019-03-01T21:30:00.000Z" |
         | rooms             | ["RM@arabitpro.local"]     |
