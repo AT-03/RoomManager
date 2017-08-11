@@ -47,7 +47,7 @@ Before do
 end
 
 # Delete all meetings
-Before do
+Before('@deleteMeetings') do
   @db_es.drop 'meetings'
   @db_rm.drop 'meetings'
 end
