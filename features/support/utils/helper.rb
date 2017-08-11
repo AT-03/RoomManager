@@ -19,8 +19,9 @@ class Helper
   # Daniel Montecinos
   def self.build_endpoint(endpoint, key = '', response = {})
     if endpoint.include?('{')
-      condition = parse_to_json(response.body).key?(key)
-      value = condition ? parse_to_json(response.body)[key] : ''
+      parsed_response = parse_to_json(response)
+
+      value = parsed_response.key?(key) ? parsed_response[key] : ''
 
       return endpoint.gsub(/\{\w+\}/, value)
     end
