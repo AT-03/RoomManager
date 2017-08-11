@@ -36,7 +36,6 @@ Before do
   endpoint = 'services'
 
   response = @db_es.find_element endpoint, value, Env.hostname
-  Helper.time_sleep
 
   if response.to_h.empty?
     method_name(Env.body_services, endpoint, method)
