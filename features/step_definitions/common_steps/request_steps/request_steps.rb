@@ -14,7 +14,7 @@ And(/^I set this queries:$/) do |queries|
 end
 
 And(/^I set this headers:$/) do |headers|
-  headers.rows_hash.each { |key, value| @http.add_header_field(key, value) }
+  headers.rows_hash.each { |key, value| @http.add_header_field(key, value)}
 end
 
 When(/^I execute the request$/) do
@@ -39,21 +39,17 @@ Then(/^I store the '(_?\w+)' as '(?:.+)'$/) do |key|
   @key = key
 end
 
-And(/^the '(_?\w+)' value of the response body should be '(?:.+)'$/) do |key|
-  expect(Helper.get_value(key, @json.body)).to eql(@value)
-end
-
 And(/^after build a expected response with the fields:$/) do |table|
   @built_response = {}
   table.transpose.column_names.each do |field|
     Helper.parse_to_json(@json.body).each do |key, value|
-      @built_response.store(key, value) if key.eql?(field.to_sym)
+      @built_response.store(key, value) if key.eql?(field)
     end
   end
 end
 
 And(/^the built response should be equal to the obtained response$/) do
-  expect(@built_response.to_json).to be_json_eql(@json.body)
+  expect(@built_response.to_json).to be_json_eql(@last_json.body)
 end
 
 And(/^I've loaded (.*)\.json$/) do |json_file|
@@ -64,10 +60,20 @@ And(/^I've used the file to set the body request$/) do
   @http.add_body(@json_body)
 end
 
-And(/^I obtain the response$/) do
+And(/^the meeting should be updated$/) do
+  expect(@last_json).to_not be_json_eql(@json)
+end
+
+And(/^I store the response$/) do
   @last_json = @json
 end
 
-And(/^the meeting should be updated$/) do
-  expect(@last_json).to_not be_json_eql(@json)
+And(/^the JSON response should( not)? include the field "(\w+)"$/) do |field, negative|
+  answer = Helper.parse_to_json(@json.body).key?(field)
+
+  not answer if negative
+end
+
+And(/^the '(_\w+)' value of the response body should remain unchanged$/) do |key|
+  expect(Helper.get_value(key, @json.body)).to eql(@value)
 end

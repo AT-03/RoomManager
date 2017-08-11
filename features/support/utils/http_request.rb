@@ -1,6 +1,5 @@
 require 'json'
 require_relative 'helper'
-# require_relative '../../../../features/support/env'
 
 # HttpRequest class.
 # Author: Daniel Montecinos, Pablo Ramirez.
@@ -8,8 +7,7 @@ class HttpRequest
   attr_reader :header, :body, :method, :url
 
   def initialize(endpoint)
-    user = Env.user_password
-    credentials = Helper.encode_credentials(user)
+    credentials = Helper.encode_credentials(Env.user_password)
 
     @endpoint = endpoint
     @header = {
@@ -17,15 +15,17 @@ class HttpRequest
         Credentials: credentials
     }
     @body = {}
-    @method = 'get'
   end
 
   # Daniel Montecinos
   # Use this method if you want to change the values set by default.
-  def add_header_field(key, value)
-    @header.delete_if {|k| key.end_with?(k.to_s) || key.equal?(k.to_s)}
+  def add_header_field(new_key, value)
+    @header.delete_if do |key|
+      key = key.to_s
+      new_key.end_with?(key) || new_key.equal?(key)
+    end
 
-    @header.store(key, value)
+    @header.store(new_key, value)
   end
 
   def add_header_query(query = {})
