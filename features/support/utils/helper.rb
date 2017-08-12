@@ -39,6 +39,6 @@ class Helper
   end
 
   def self.timer(timeout)
-    ::Time.now + timeout
+    sleep timeout
   end
 end
