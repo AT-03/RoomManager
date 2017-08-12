@@ -38,7 +38,7 @@ class Helper
     JSON.parse(object)
   end
 
-  def self.time_sleep
-    sleep Env.time_sleep
+  def self.timer(timeout)
+    sleep timeout
   end
 end

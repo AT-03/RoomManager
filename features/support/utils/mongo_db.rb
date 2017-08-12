@@ -4,7 +4,6 @@ require 'mongo'
 class Mongodb
   def initialize(host_port, data_base)
     Mongo::Logger.logger.level = ::Logger::FATAL
-
     @connection = Mongo::Client.new([host_port],
                                     database: data_base)
   end
@@ -21,5 +20,9 @@ class Mongodb
 
   def close_connection
     @connection.close
+  end
+
+  def drop_database
+    @connection.database.drop
   end
 end

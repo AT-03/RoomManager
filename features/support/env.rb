@@ -54,7 +54,7 @@ class Env
 
   def self.data_base_es
     config = load_file
-    @db_es = config['Data-Base']['database_es']
+    @db = config['Data-Base']['database_es']
   end
 
   def self.data_base_rm
