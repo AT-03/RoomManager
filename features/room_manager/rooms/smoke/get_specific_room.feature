@@ -1,6 +1,5 @@
 Feature: SMOKE - Get a specific room
 
-  @createService
   Scenario: Get all rooms without query
     Given I look 'room_four' from 'name' of the table 'rooms'
       And I make a 'GET' request to '/rooms/{roomsId}'
