@@ -111,7 +111,7 @@ class Env
     @body = {hostname: Env.hostname, username: @user, password: @pass}
   end
 
-  def self.time_sleep
+  def self.timer
     config = load_file
     @sleep = config['Sleep']['time']
   end

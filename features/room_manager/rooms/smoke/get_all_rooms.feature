@@ -1,6 +1,6 @@
 Feature: SMOKE - Get all rooms
 
-  @deleteRooms @createService
+  @delete_rooms
   Scenario: Get all rooms without query
     Given I make a 'GET' request to '/rooms'
     When I execute the request
@@ -10,6 +10,7 @@ Feature: SMOKE - Get all rooms
       []
       """
 
+  @delete_rooms
   Scenario: Get all rooms with status free
     Given I make a 'GET' request to '/rooms'
       And I set this queries:
@@ -23,6 +24,7 @@ Feature: SMOKE - Get all rooms
       []
       """
 
+  @delete_rooms
   Scenario: Get all rooms with status busy
     Given I make a 'GET' request to '/rooms'
       And I set this queries:
