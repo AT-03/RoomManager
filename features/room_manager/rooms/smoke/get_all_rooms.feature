@@ -1,14 +1,5 @@
-Feature: SMOKE - Get all rooms
-
-  @delete_rooms
-  Scenario: Get all rooms without query
-    Given I make a 'GET' request to '/rooms'
-    When I execute the request
-    Then I expect a '200' status code
-      And the JSON should be:
-      """
-      []
-      """
+@smoke
+Feature: GET request to all rooms
 
   @delete_rooms
   Scenario: Get all rooms with status free
