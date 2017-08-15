@@ -1,3 +1,4 @@
+# Author: Pablo Ramirez
 @crud
 Feature: GET request to all rooms
 

@@ -19,7 +19,6 @@ class Env
     @user_and_password= "#{@user}:#{@password}"
   end
 
-#
   def self.exchanges
     config = load_file
     default(config)
@@ -44,6 +43,7 @@ class Env
     @host = config['general_data']['host']
   end
 
+  # Author: Pablo Ramirez
   def self.host_port_db
     config = load_file
     @host_db = config['Data-Base']['host']
@@ -52,26 +52,31 @@ class Env
 
   end
 
+  # Author: Pablo Ramirez
   def self.data_base_es
     config = load_file
     @db = config['Data-Base']['database_es']
   end
 
+  # Author: Pablo Ramirez
   def self.data_base_rm
     config = load_file
     @db_rm = config['Data-Base']['database_rm']
   end
 
+  # Author: Pablo Ramirez
   def self.host_subscriptions
     config = load_file
     @host_subs = config['Subscriptions']['host']
   end
 
+  # Author: Pablo Ramirez
   def self.port_subscriptions
     config = load_file
     @port_subs = config['Subscriptions']['host']
   end
 
+  # Author: Pablo Ramirez
   def self.body_subscriptions
     config = load_file
     default(config)
@@ -82,21 +87,32 @@ class Env
     @body = {host: @host_subs, port: @port_subs, notificationUrl: @not_url}
   end
 
-  def self.key_header_subs
+  # Author: Pablo Ramirez
+  def self.key_header_es
     config = load_file
-    @header = config['Subscriptions']['header']
+    @header = config['Subscriptions']['Exchange-Calendar']
+    # Author: Pablo Ramirez
   end
 
-  def self.value_header_subs
+  # Author: Pablo Ramirez
+  def self.value_header_es
     config = load_file
     @user = config['user']['user']
   end
 
+  # Author: Pablo Ramirez
+  def self.key_header_rm
+    config = load_file
+    @header = config['Room-Manager']['Credentials']
+  end
+
+  # Author: Pablo Ramirez
   def self.endpoint_subscriptions
     config = load_file
     @endpoint = config['Subscriptions']['endpoint']
   end
 
+  # Author: Pablo Ramirez
   def self.hostname
     config = load_file
     @server = config['general_data']['server']
@@ -104,6 +120,7 @@ class Env
     @host = "#{@server}.#{@domain}"
   end
 
+  # Author: Pablo Ramirez
   def self.body_services
     config = load_file
     @user = config['user']['user']
@@ -111,6 +128,7 @@ class Env
     @body = {hostname: Env.hostname, username: @user, password: @pass}
   end
 
+  # Author: Pablo Ramirez
   def self.timer
     config = load_file
     @sleep = config['Sleep']['time']

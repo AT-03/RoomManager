@@ -1,0 +1,28 @@
+# Author: Pablo Ramirez
+@functional @negative @issue
+Feature: POST a service with a hostname
+
+  Scenario Outline: Create a service with a hostname
+    Given I make a 'POST' request to '/services'
+    And I set this body:
+          """
+          {
+            "hostname": <hostname>,
+            "username": "Administrator",
+            "password": "P@ssw0rd",
+            "deleteLockTime": 11
+          }
+          """
+    When I execute the request
+    Then I expect a '<status>' status code
+    And the JSON should be:
+          """
+          {
+            "name":"<response_name>",
+            "description":"<response_description>"
+          }
+          """
+    Examples:
+      | hostname                                                                                                                                                                                                                                                                                                                           | status | response_name           | response_description                                                  |
+      | "10.28.124.148"                                                                                                                                                                                                                                                                                                                    | 409    | Conflict value          | Conflict with a domain with same name, the domain needs to be unique. |
+      | "Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_" | 400    | InvalidCredentialsError | The credentials entered are not correct"                              |
