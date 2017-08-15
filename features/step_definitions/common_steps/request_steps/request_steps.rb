@@ -64,7 +64,8 @@ And(/^the meeting should be updated$/) do
   expect(@last_json).to_not be_json_eql(@json)
 end
 
-Given(/^I look '([^\n]+)' from '(\w+)' of the table '(\w+)'$/) do |value, key, endpoint|
+# Author: Pablo Ramirez
+Given(/^I have obtained roomsId for '([^\n]+)' from '(\w+)' of the table '(\w+)'$/) do |value, key, endpoint|
   @bson = @db_rm.find_element(endpoint, key, value)
   @json = Helper.get_value('_id', @bson.to_json).to_json
   @key = '$oid'

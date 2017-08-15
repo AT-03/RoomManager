@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@crud
+@functional @positive
 Feature: POST a new service
 
   @delete_services
@@ -8,9 +8,9 @@ Feature: POST a new service
       And I set this body:
         """
         {
-          "hostname": "server2012dc.ArabITPro.local",
-          "username": "Administrator",
-          "password": "P@ssw0rd",
+          "hostname": Env.hostname,
+          "username": Env.user,
+          "password": Env.password,
           "deleteLockTime": 11
         }
         """
