@@ -25,7 +25,7 @@ module TeamCityFormatter
     end
 
     def test_failed(test_name, details)
-      render_output("#RoomManager[FAILED Id='#{id}' name='#{teamcity_escape(test_name)}' message='#{teamcity_escape(details)}' timestamp='#{timestamp}']")
+      render_output("#RoomManager[FAILED Id='#{id}' name='#{teamcity_escape(test_name)}' message='#{json_print(details)}' timestamp='#{timestamp}']")
     end
 
     def test_ignored(test_name, details)
@@ -54,6 +54,9 @@ module TeamCityFormatter
           .gsub("\n", '|n')
     end
 
+
+
+
     def timestamp_short
       now = Time.now
       '%s.%0.3d' % [now.strftime('%H:%M:%S'), (now.usec / 1000)]
@@ -65,12 +68,41 @@ module TeamCityFormatter
     end
 
     def format_exception(exception)
-      lines = ["#{exception.message} (#{exception.class})"] + exception.backtrace
-      lines.join("\n")
+    var =exception.class.to_s=="RSpec::Expectations::ExpectationNotMetError"
+    lines = ["#{exception.message}"] + exception.backtrace
+
     end
 
     def id
       Process.pid
+    end
+
+    def json_print(s)
+
+
+      puts ">>>>>#{s.to_s
+                       .gsub("JSON","")
+                        .gsub("equivalent","")
+                        .gsub('0m','')
+                       .gsub('@@','')
+                        .gsub('\n','')
+                        .gsub('\e','')
+                        .gsub('[','')
+                        .gsub('Diff:','')
+                        .gsub('Expected','')
+                        .gsub('34m','')
+                        .gsub('-4,6','')
+                        .gsub('+4,6','')
+                        .gsub('31m-','')
+                        .gsub('32m+','')
+
+
+
+
+      }"
+
+
+
     end
   end
 end

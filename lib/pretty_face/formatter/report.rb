@@ -20,7 +20,10 @@ module PrettyFace
       end
 
       def table_image_for(status, source=nil)
+        var= File.dirname(__dir__)+"/templates"
+        # puts "REAL DIRECTORY>>#{File.dirname(__dir__)+"/templates"}"
         dir = "#{directory_prefix_for(source)}images"
+
         "<img src=\"#{dir}/table_#{status}.png\" alt=\"#{status}\" title=\"#{status}\">"
 
       end
@@ -30,6 +33,7 @@ module PrettyFace
         back_dir = source.count(separator) if source
         back_dir.times do
           dir += "..#{separator}"
+
         end
         dir
       end
@@ -83,7 +87,7 @@ module PrettyFace
     class ReportFeature
       include Formatting
       attr_accessor :scenarios, :background, :description
-      attr_reader :title, :file, :start_time, :duration, :parent_filename
+      attr_reader :title, :file, :start_time, :duration, :parent_filename, :file2
 
       def initialize(feature, parent_filename)
         @scenarios = []
@@ -97,8 +101,11 @@ module PrettyFace
         @title = feature.name
         @duration = Time.now - start_time
         a_file = feature.file.sub(/\.feature/, '.html')
+
         to_cut = a_file.split(separator).first
         @file = a_file.sub("#{to_cut}#{separator}", '')
+        @file1 = a_file.split '/'
+        @file2 = @file1[0]
       end
 
       def steps

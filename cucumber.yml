@@ -1,7 +1,8 @@
 #Juan Aitken
-default: --format PrettyFace::Formatter::Html --out test_reports/all.html
+default: --format TeamCityFormatter::Formatter
 all: --format PrettyFace::Formatter::Html --out test_reports/all.html
 somoke: --tags @smoke --format PrettyFace::Formatter::Html --out test_reports/smoke.html
 crud: --tags @functional --format PrettyFace::Formatter::Html --out test_reports/crud.html
 funtional: --tags @functional --format PrettyFace::Formatter::Html --out test_reports/functional.html
 logger: --format TeamCityFormatter::Formatter
+test: --tags @test --format TeamCityFormatter::Formatter
