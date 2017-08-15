@@ -1,4 +1,6 @@
+# Autor Daniel Cabero
 
+# this rake task is run in the travis CI and not failed in this.
 require 'bundler/gem_tasks'
 require 'rake/testtask'
 Rake::TestTask.new do |t|

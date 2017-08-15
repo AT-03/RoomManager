@@ -82,6 +82,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.6)
+    json-compare (0.1.8)
     json_spec (1.1.5)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
@@ -96,7 +97,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_mime (0.1.3)
+    mini_mime (0.1.4)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
     mongo (2.4.3)
@@ -161,7 +162,7 @@ GEM
     rspec-mocks (3.6.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
-    rspec-rails (3.6.0)
+    rspec-rails (3.6.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -208,6 +209,7 @@ DEPENDENCIES
   faker
   growl
   guard-rspec
+  json-compare
   json_spec
   mongo
   pretty_face (~> 0.10.3)
