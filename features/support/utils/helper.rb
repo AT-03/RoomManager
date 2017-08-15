@@ -12,8 +12,8 @@ class Helper
     parse_to_json(json).fetch(key)
   end
 
-  def self.encode_credentials(user)
-    Base64.encode64(user)
+  def self.encode_credentials(credentials)
+    Base64.encode64(credentials)
   end
 
   # Daniel Montecinos
@@ -21,7 +21,9 @@ class Helper
     if endpoint.include?('{')
       parsed_response = parse_to_json(response)
 
-      value = parsed_response.key?(key) ? parsed_response[key] : ''
+      # invalid_id = '0eee25f78cb9c904b430d84f'
+      invalid_id = SecureRandom.hex(12)
+      value = parsed_response.key?(key) ? parsed_response[key] : invalid_id
 
       return endpoint.gsub(/\{\w+\}/, value)
     end
