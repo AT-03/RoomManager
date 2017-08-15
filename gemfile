@@ -1,3 +1,4 @@
+# Author: Daniel Cabero
 source 'https://rubygems.org'
 
 gem 'pretty_face', '~> 0.10.3'
@@ -21,7 +22,7 @@ gem 'growl'
 gem 'guard-rspec'
 gem 'rb-fsevent'
 gem 'json_spec'
-
+gem 'json-compare'
 
 
 @gemspec

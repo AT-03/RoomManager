@@ -1,5 +1,4 @@
-# Cabero Daniel
-
+# Author: Daniel Cabero
 require 'bundler/gem_tasks'
 require 'rubygems'
 require 'rspec/core'
@@ -8,6 +7,7 @@ require 'cucumber'
 require 'cucumber/rake/task'
 require 'rspec'
 
+# Task default for the run in the travis CI.
 task :spec do
   RSpec::Core::RakeTask.new(:spec)
   task default: :spec
@@ -15,17 +15,7 @@ task :spec do
 
 end
 
-task(:default).clear
-
-task default: :spec
-
-task :@cucumber do
-  Cucumber::Rake::Task.new :features do |t|
-    t.profile = 'default'
-    t.cucumber_opts = 'features'
-    sh 'cucumber --tags @cucumber --format PrettyFace::Formatter::Html --out cucumber.html'
-  end
-end
+# Task for the generate the report of the all features files.
 task :@all do
   Cucumber::Rake::Task.new :all do |t|
     t.profile = 'default'
@@ -33,6 +23,7 @@ task :@all do
   end
 end
 
+# Task for the generate the report of the smoke features files.
 task(:@smoke) {
   Cucumber::Rake::Task.new :smoke do |t|
     t.profile = 'default'
@@ -40,15 +31,24 @@ task(:@smoke) {
   end
 }
 
+# Task for the generate the report of the CRUD features files.
 task :@crud do
   Cucumber::Rake::Task.new :crud do |t|
     t.profile = 'default'
     sh 'cucumber --tags @crud --format PrettyFace::Formatter::Html --out test_reports/crud.html'
   end
 end
+
+# Task for the generate the report of the Functional features files.
 task :@functional do
   Cucumber::Rake::Task.new :functional do |t|
     t.profile = 'default'
     sh 'cucumber --tags @functional --format PrettyFace::Formatter::Html --out test_reports/functional.html'
   end
 end
+
+# the execute default for the clean.
+task(:default).clear
+
+#
+task default: :spec
