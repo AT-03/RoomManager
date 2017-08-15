@@ -1,6 +1,10 @@
-Feature: SMOKE, GET request to a specific meeting
+# Author: Daniel Montecinos
 
-  Background: Create a meeting
+@smoke
+Feature: SMOKE
+
+  Background: Create a meeting, set a 'user' email as a value for
+  'organizer' and store its id
     Given I make a 'POST' request to '/meetings'
       And I set this body:
         """
@@ -21,17 +25,15 @@ Feature: SMOKE, GET request to a specific meeting
       And I store the response
       And I store the '_id' as '{meetingId}'
 
-  Scenario: Retrieve a specific meeting
+  Scenario: Retrieve a specific meeting for an 'organizer' field that
+  was set with a valid 'user' email
     When I make a 'GET' request to '/meetings/{meetingId}'
-      And I set this queries:
-        | owner | administrator@arabitpro.local |
-        | start | 2019-03-01T00:00:00.000Z      |
-        | end   | 2019-03-31T23:59:59.000Z      |
       And I execute the request
       And after build a expected response with the fields:
         | _id               |
         | organizer         |
         | subject           |
+        | owner             |
         | body              |
         | start             |
         | end               |
@@ -40,5 +42,4 @@ Feature: SMOKE, GET request to a specific meeting
         | optionalAttendees |
 
     Then I expect a '200' status code
-      And the JSON at "_id" should be an string
       And the built response should be equal to the obtained response

@@ -1,3 +1,5 @@
+# Author: Daniel Montecinos, Pablo Ramirez
+
 require_relative '../../../../features/support/utils/http_request'
 require_relative '../../../../features/support/utils/request_manager'
 require_relative '../../../../features/support/utils/helper'
@@ -13,8 +15,8 @@ And(/^I set this queries:$/) do |queries|
   @http.add_header_query(queries.rows_hash)
 end
 
-And(/^I set this headers:$/) do |headers|
-  headers.rows_hash.each { |key, value| @http.add_header_field(key, value)}
+And(/^I set this headers?:$/) do |headers|
+  headers.rows_hash.each {|key, value| @http.add_header_field(key, value)}
 end
 
 When(/^I execute the request$/) do
@@ -32,6 +34,7 @@ end
 
 And(/^I set this body:$/) do |json|
   @http.add_body(json)
+  @body = Helper.parse_to_json(json)
 end
 
 Then(/^I store the '(_?\w+)' as '(?:.+)'$/) do |key|
@@ -39,6 +42,7 @@ Then(/^I store the '(_?\w+)' as '(?:.+)'$/) do |key|
   @key = key
 end
 
+# Author: Daniel Montecinos
 And(/^after build a expected response with the fields:$/) do |table|
   @built_response = {}
   table.transpose.column_names.each do |field|
@@ -48,22 +52,12 @@ And(/^after build a expected response with the fields:$/) do |table|
   end
 end
 
+# Author: Daniel Montecinos
 And(/^the built response should be equal to the obtained response$/) do
   expect(@built_response.to_json).to be_json_eql(@last_json.body)
 end
 
-And(/^I've loaded (.*)\.json$/) do |json_file|
-  @json_body = File.read("resources/rm_meetings/#{json_file}")
-end
-
-And(/^I've used the file to set the body request$/) do
-  @http.add_body(@json_body)
-end
-
-And(/^the meeting should be updated$/) do
-  expect(@last_json).to_not be_json_eql(@json)
-end
-
+# Author: Daniel Montecinos
 # Author: Pablo Ramirez
 Given(/^I have obtained roomsId for '([^\n]+)' from '(\w+)' of the table '(\w+)'$/) do |value, key, endpoint|
   @bson = @db_rm.find_element(endpoint, key, value)
@@ -75,12 +69,35 @@ And(/^I store the response$/) do
   @last_json = @json
 end
 
-And(/^the JSON response should( not)? include the field "(\w+)"$/) do |field, negative|
-  answer = Helper.parse_to_json(@json.body).key?(field)
+# Author: Daniel Montecinos
+And(/^the response should( not)? include the field "(\w+)"$/) do |fld, negative|
+  answer = Helper.parse_to_json(@json.body).key?(fld)
 
-  not answer if negative
+  !answer if negative
 end
 
-And(/^the '(_\w+)' value of the response body should remain unchanged$/) do |key|
+And(/^the '(_\w+)' value should remain unchanged$/) do |key|
   expect(Helper.get_value(key, @json.body)).to eql(@value)
+end
+
+# Author: Daniel Montecinos
+And(/^I change the "(key|value)" of "(.+)" to "(.*)"$/) do |type, key, argument|
+  if type.eql?('key')
+    @http.change_header_key(key, argument)
+  else
+    @http.change_key_value(key, argument)
+  end
+end
+
+# Author: Daniel Montecinos
+And(/^I construct a expected response adding this fields:$/) do |fields|
+  fields.transpose.column_names.each do |field|
+    value = Helper.get_value(field, @json.body)
+    @body[field] = value
+  end
+end
+
+# Author: Daniel Montecinos
+And(/^the built expected response should be equal to the obtained response$/) do
+  expect(@body.to_json).to be_json_eql(@json.body).excluding("rooms")
 end

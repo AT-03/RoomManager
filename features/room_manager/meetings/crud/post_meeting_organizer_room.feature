@@ -1,6 +1,9 @@
-Feature: CRUD - Create a new meeting, using a valid 'room' email as a value for the 'organizer' field
+# Author: Daniel Montecinos
 
-  Scenario: A new meeting should be created after used the correct parameters
+@crud
+Feature: CRUD
+
+  Scenario: Create a meeting setting the field 'organizer' with a valid 'room' email
     Given I make a 'POST' request to '/meetings'
       And I set this body:
         """
@@ -16,7 +19,7 @@ Feature: CRUD - Create a new meeting, using a valid 'room' email as a value for 
             "attendees": [],
             "optionalAttendees": []
           }
-        """
+          """
     When I execute the request
       And I store the response
       And after build a expected response with the fields:
@@ -32,6 +35,5 @@ Feature: CRUD - Create a new meeting, using a valid 'room' email as a value for 
         | optionalAttendees |
 
     Then I expect a '200' status code
-      And the JSON response should include the field "owner"
       And the JSON response at "owner" should include "RM@arabitpro.local"
       And the built response should be equal to the obtained response

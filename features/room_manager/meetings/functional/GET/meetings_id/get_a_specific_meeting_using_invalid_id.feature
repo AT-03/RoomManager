@@ -1,6 +1,9 @@
-Feature: SMOKE, GET request to a specific meeting
+# Author: Daniel Montecinos
 
-  Background: Create a meeting
+@functional @negative
+Feature: FUNCTIONAL
+
+  Background: Create a meeting and store its id
     Given I make a 'POST' request to '/meetings'
       And I set this body:
         """
@@ -18,15 +21,10 @@ Feature: SMOKE, GET request to a specific meeting
         }
         """
       And I execute the request
-      And I store the response
-      And I store the '_id' as '{meetingId}'
+      And I store the 'id' as '{invalidId}'
 
-  Scenario: Retrieve a specific meeting
-    When I make a 'GET' request to '/meetings/{meetingId}'
-      And I set this queries:
-        | owner | administrator@arabitpro.local |
-        | start | 2019-03-01T00:00:00.000Z      |
-        | end   | 2019-03-31T23:59:59.000Z      |
+  Scenario: Retrieve a specific meeting using an invalid id
+    When I make a 'GET' request to '/meetings/{invalidId}'
       And I execute the request
       And after build a expected response with the fields:
         | _id               |
@@ -39,6 +37,12 @@ Feature: SMOKE, GET request to a specific meeting
         | attendees         |
         | optionalAttendees |
 
-    Then I expect a '200' status code
-      And the JSON at "_id" should be an string
-      And the built response should be equal to the obtained response
+    Then I expect a '404' status code
+      And the JSON should be:
+        """
+          {
+            "name" : "MeetingNotFoundError",
+            "description" : "The meeting doesn't exist in the database."
+          }
+        """
+

@@ -11,8 +11,8 @@ class HttpRequest
 
     @endpoint = endpoint
     @header = {
-        :'Content-Type' => 'application/json',
-        Credentials: credentials
+      :'Content-Type' => 'application/json',
+      Credentials: credentials
     }
     @body = {}
   end
@@ -28,6 +28,19 @@ class HttpRequest
     @header.store(new_key, value)
   end
 
+  # Daniel Montecinos
+  # This method allows to change the name of an old key to
+  # a new one
+  def change_header_key(old_key, new_key)
+    @header[new_key.to_sym] = @header.delete(old_key.to_sym)
+  end
+
+  # Daniel Montecinos
+  # This method allows to change the value of a key
+  def change_key_value(key, value)
+    @header[key.to_sym] = value
+  end
+
   def add_header_query(query = {})
     @header[:params] = query
   end
@@ -41,7 +54,7 @@ class HttpRequest
   end
 
   def build_url
-    base_url = @header.key?('Exchange-Calendar') ? Env.exchanges : Env.room
+    base_url = @header.key?(:'Exchange-Credentials') ? Env.exchanges : Env.room
     @url = "#{base_url}#{@endpoint}"
   end
 end
