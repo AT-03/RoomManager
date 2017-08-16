@@ -3,6 +3,7 @@
 @crud
 Feature: CRUD
 
+  @delete_meetings
   Scenario: Retrieve all the created meetings
     Given I make a 'GET' request to '/meetings'
       And I change the "value" of "Credentials" to ""

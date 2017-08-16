@@ -2,7 +2,7 @@
 
 @functional @positive
 Feature: FUNCTIONAL
-
+  @delete_meetings
   Scenario: Try to retrieve all created meetings between a specific period of
   time, for example from 20:00 PM to 20.30 PM
     Given I make a 'GET' request to '/meetings'

@@ -1,6 +1,6 @@
 # Author: Daniel Montecinos
 
-@functional @negative @issue
+@functional @negative
 Feature: FUNCTIONAL
 
   Scenario Outline: Try to create a meeting using different
@@ -26,6 +26,13 @@ Feature: FUNCTIONAL
       And I execute the request
 
     Then I expect a '400' status code
+      And the JSON should be:
+        """
+          {
+            "name": "ValidationError",
+            "description":"data should have required property 'organizer'"
+          }
+        """
 
     Examples:
       | content-type    |

@@ -91,4 +91,4 @@ Feature: FUNCTIONAL
         """
       And I execute the request
     Then I expect a '200' status code
-      And the JSON at "body" should be ""
+      And the JSON at "body" should be null

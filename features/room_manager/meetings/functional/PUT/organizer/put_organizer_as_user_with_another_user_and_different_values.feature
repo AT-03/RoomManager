@@ -25,7 +25,7 @@ Feature: FUNCTIONAL
       And I execute the request
       And I store the '_id' as '{meetingId}'
 
-  Scenario:  Try to update the 'organizer' field of an exiting meeting with
+  Scenario: Try to update the 'organizer' field of an exiting meeting with
   another 'user' email and using a valid id
     When I make a 'PUT' request to '/meetings/{meetingId}'
       And I set this body:
