@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative
+@rm @rooms @functional @negative
 Feature: Get a specific room with incorrect property names
 
   Scenario: Retrieve a specific room using "new property" as property names

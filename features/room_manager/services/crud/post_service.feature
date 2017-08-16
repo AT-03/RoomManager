@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@crud
+@rm @services @crud
 Feature: POST a new service
 
   @delete_services

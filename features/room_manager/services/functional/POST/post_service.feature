@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @positive
+@rm @services @functional @positive
 Feature: POST a new service
 
   @delete_services

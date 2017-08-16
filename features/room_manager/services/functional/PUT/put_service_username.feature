@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative
+@rm @services @functional @negative
 Feature: PUT an existing service an empty username
 
   Background: Create a service
@@ -20,19 +20,17 @@ Feature: PUT an existing service an empty username
   @delete_services
   Scenario Outline: Update a service created using an empty username
     Given I make a 'PUT' request to '/services/{serviceId}'
-      And I set this body:
-          """
-          {
-            "hostname": "Env.hostname",
-            "username": <username>,
-            "password": "Env.password",
-            "deleteLockTime": 11
-          }
-          """
-      And I replace the values of the body request
+        And I set this body:
+            """
+            {
+              "username": <username>,
+              "password": "P@ssw0rd",
+              "deleteLockTime": 11
+            }
+            """
     When I execute the request
     Then I expect a '400' status code
-    And the JSON should be:
+      And the JSON should be:
               """
               {
                 "name": "<response_name>",

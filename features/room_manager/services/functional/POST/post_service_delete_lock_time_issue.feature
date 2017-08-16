@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative @issue
+@rm @services @functional @negative @issue
 Feature: POST a new service with deleteLockTime field
 
   Scenario Outline: Create a new service using deleteLockTime field

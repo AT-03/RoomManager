@@ -21,7 +21,6 @@ class Helper
     if endpoint.include?('{')
       parsed_response = parse_to_json(response)
 
-      # invalid_id = '0eee25f78cb9c904b430d84f'
       invalid_id = SecureRandom.hex(12)
       value = parsed_response.key?(key) ? parsed_response[key] : invalid_id
 
