@@ -4,14 +4,16 @@ Feature: PUT an existing service with id field
 
   Scenario Outline: Update a service created using id field
     Given I make a 'PUT' request to '/services/<id>'
-    And I set this body:
-              """
-              {
-                "username": "Administrator",
-                "password": "P@ssw0rd",
-                "deleteLockTime": 15
-              }
-            """
+      And I set this body:
+          """
+          {
+            "hostname": "Env.hostname",
+            "username": "Env.user",
+            "password": "Env.password",
+            "deleteLockTime": 11
+          }
+          """
+      And I replace the values of the body request
     When I execute the request
     Then I expect a '<status>' status code
     And the JSON should be:

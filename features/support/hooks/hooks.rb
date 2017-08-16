@@ -10,11 +10,8 @@ Before do
   $db_es = Mongodb.new(host_port, data_base_es)
   @db_rm = Mongodb.new(host_port, data_base_rm)
 
-  $db_es.drop_database
-  @db_rm.drop_database
-
-  Hooks_helper.request_post_hook(method, 'subscriptions', 'host', Env.key_header_es,
-                    Env.value_header_es,
+  Hooks_helper.request_post_hook(method, 'subscriptions', 'host', Env.key_header_es.to_sym,
+                                 Helper.encode_credentials(Env.user_password),
                     Env.host_subscriptions,
                     Env.body_subscriptions)
 

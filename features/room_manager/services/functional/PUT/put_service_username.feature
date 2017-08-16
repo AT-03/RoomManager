@@ -4,29 +4,32 @@ Feature: PUT an existing service an empty username
 
   Background: Create a service
     Given I make a 'POST' request to '/services'
-    And I set this body:
-              """
-              {
-                "hostname": "server2012dc.ArabITPro.local",
-                "username": "Administrator",
-                "password": "P@ssw0rd",
-                "deleteLockTime": 10
-              }
-              """
+      And I set this body:
+          """
+          {
+            "hostname": "Env.hostname",
+            "username": "Env.user",
+            "password": "Env.password",
+            "deleteLockTime": 11
+          }
+          """
+      And I replace the values of the body request
     When I execute the request
     And I store the '_id' as '{serviceId}'
 
   @delete_services
   Scenario Outline: Update a service created using an empty username
     Given I make a 'PUT' request to '/services/{serviceId}'
-    And I set this body:
-            """
-            {
-              "username": <username>,
-              "password": "P@ssw0rd",
-              "deleteLockTime": 15
-            }
+      And I set this body:
           """
+          {
+            "hostname": "Env.hostname",
+            "username": <username>,
+            "password": "Env.password",
+            "deleteLockTime": 11
+          }
+          """
+      And I replace the values of the body request
     When I execute the request
     Then I expect a '400' status code
     And the JSON should be:

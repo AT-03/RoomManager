@@ -8,14 +8,15 @@ Feature: POST a new service
       And I set this body:
         """
         {
-          "hostname": Env.hostname,
-          "username": Env.user,
-          "password": Env.password,
+          "hostname": "Env.hostname",
+          "username": "Env.user",
+          "password": "Env.password",
           "deleteLockTime": 11
         }
         """
+      And I replace the values of the body request
     When I execute the request
-      And I store the response
+    And I store the response
       And after build a expected response with the fields:
           | _id            |
           | type           |
@@ -24,6 +25,6 @@ Feature: POST a new service
           | deleteLockTime |
 
     Then I expect a '200' status code
-      And the JSON response should include the field "name"
+      And the response should include the field "name"
       And the JSON response at "name" should include "Exchange Server 2016"
       And the built response should be equal to the obtained response

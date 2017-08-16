@@ -4,14 +4,14 @@ Feature: Get all rooms using field status
 
   Scenario Outline: Retrieve all rooms using field status
     Given I make a 'GET' request to '/rooms'
-    And I set this queries:
-      | $select | name                     |
-      | from    | 2017-01-01T00:00:00.000Z |
-      | to      | 2017-01-01T00:00:59.000Z |
-      | status  | <status>                 |
+      And I set this queries:
+        | $select | name                     |
+        | from    | 2017-01-01T00:00:00.000Z |
+        | to      | 2017-01-01T00:00:59.000Z |
+        | status  | <status>                 |
     When I execute the request
     Then I expect a '400' status code
-    And the JSON should be:
+      And the JSON should be:
             """
             {
               "name": "<response_name>",
