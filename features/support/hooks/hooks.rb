@@ -37,6 +37,12 @@ Before('@delete_rooms') do
   @db_rm.drop 'rooms'
 end
 
+# Author Juan Aitken
+# Delete subscriptions
+Before('@delete_subscriptions') do
+  $db_es.drop 'subscriptions'
+end
+
 # Close Database
 After do
   $db_es.close_connection
