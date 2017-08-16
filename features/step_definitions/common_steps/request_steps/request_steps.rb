@@ -107,3 +107,14 @@ And(/^I replace the values of the body request$/) do
   end
   @http.add_body(@body.to_json)
 end
+
+#Juan Aitken
+And(/^I load exchange server credentials$/) do
+  @http.change_header_key('Credentials', 'Exchange-Credentials')
+end
+
+#Juan Aitken
+When(/^I set the headers:$/) do |headers|
+  headers.rows_hash.each {|key, value| @http.change_header_key('', key)}
+  headers.rows_hash.each {|key, value| @http.change_key_value(key,value)}
+end
