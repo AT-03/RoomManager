@@ -1,6 +1,6 @@
 # Author: Daniel Montecinos
 
-@functional @positive
+@functional @positive @issue
 Feature: FUNCTIONAL
 
   Background: Create a meeting and set 'organizer' parameter with a valid
@@ -67,4 +67,4 @@ Feature: FUNCTIONAL
           }
         """
       And I execute the request
-    Then I expect a '200' status code
+    Then I expect a '400' status code

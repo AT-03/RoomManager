@@ -3,7 +3,7 @@
 @functional @negative @issue
 Feature: FUNCTIONAL
 
-  Background: Create a meeting seeting a valid 'user' as a value
+  Background: Create a meeting setting a valid 'user' as a value
   for 'organizer' field and store its id
     Given I make a 'POST' request to '/meetings'
       And I set this body:

@@ -1,8 +1,10 @@
+#Author: Juan Aitken
 @crud
 Feature: CRUD - Create a new service, using a valid 'hostname' with valid credentials
   @delete_services
   Scenario: A new service should be created after used the correct parameters
     Given I make a 'POST' request to '/services'
+    When  I load exchange server credentials
       And I set this body:
           """
            {

@@ -1,8 +1,8 @@
 # Author: Daniel Montecinos
 
-@functional @negative
 Feature: FUNCTIONAL
 
+  @functional @negative
   Scenario: Try to retrieve all created meetings without set queries
     Given I make a 'GET' request to '/meetings'
     When I execute the request
@@ -15,6 +15,7 @@ Feature: FUNCTIONAL
           }
         """
 
+  @functional @negative
   Scenario Outline: Try to retrieve all created meetings setting
   the owner field with invalid emails
     Given I make a 'GET' request to '/meetings'
@@ -38,6 +39,7 @@ Feature: FUNCTIONAL
       | fake_owner_email@arabitpro.local |
       | !@#$%^&*()                       |
 
+  @functional @negative
   Scenario: Try to retrieve all created meetings setting the start
   field with an invalid date
     Given I make a 'GET' request to '/meetings'
@@ -51,10 +53,11 @@ Feature: FUNCTIONAL
       """
         {
           "name" : "ValidationDateError",
-          "description" : "Start '209-01-31T20:30:00.000Z' does not match an ISO-8601 date format"
+          "description" : "Start '209-03-31T20:30:00.000Z' does not match an ISO-8601 date format"
         }
       """
 
+  @functional @negative @issue
   Scenario: Try to retrieve all created meetings setting the start field with an inexistent date
     Given I make a 'GET' request to '/meetings'
     And I set this queries:
@@ -71,6 +74,7 @@ Feature: FUNCTIONAL
         }
       """
 
+  @functional @negative @issue
   Scenario: Try to retrieve all created meetings setting the end
   field with an invalid date
     Given I make a 'GET' request to '/meetings'
@@ -88,6 +92,7 @@ Feature: FUNCTIONAL
         }
       """
 
+  @functional @negative @issue
   Scenario: Try to retrieve all created meetings setting the end field with an inexistent date
     Given I make a 'GET' request to '/meetings'
     And I set this queries:
