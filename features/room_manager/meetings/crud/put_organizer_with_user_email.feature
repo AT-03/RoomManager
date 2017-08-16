@@ -1,7 +1,7 @@
 # Author: Daniel Montecinos
 
-@crud @issue
-Feature: CRUD
+@rm @meetings @crud @issue
+Feature: PUT /meetings/{meetingId}
 
   Background: Create a meeting, set a 'user' email as a value for
   the 'organizer' field and store its id

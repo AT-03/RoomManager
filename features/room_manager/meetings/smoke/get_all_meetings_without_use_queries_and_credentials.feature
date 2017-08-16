@@ -1,7 +1,7 @@
 # Author: Daniel Montecinos
 
-@smoke
-Feature: SMOKE
+@rm @meetings @smoke
+Feature: Get /meetings
 
   @delete_meetings
   Scenario: Retrieve all the created meetings without use queries and

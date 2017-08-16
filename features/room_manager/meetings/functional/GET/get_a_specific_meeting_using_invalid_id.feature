@@ -1,15 +1,14 @@
 # Author: Daniel Montecinos
 
-@rm @meetings @smoke
-Feature: Get /meetings
+@rm @meetings @functional @get @negative
+Feature: GET /meetings/{meetingId}
 
-  Background: Create a meeting, set a 'room' email as a value for 'organizer'
-  and store its id
+  Background: Create a meeting and store its id
     Given I make a 'POST' request to '/meetings'
       And I set this body:
         """
         {
-          "organizer": "RM@arabitpro.local",
+          "organizer": "Administrator@arabitpro.local",
           "subject": "Subject Test",
           "body": "Body Test",
           "start": "2019-03-01T20:00:00.000Z",
@@ -22,19 +21,15 @@ Feature: Get /meetings
         }
         """
       And I execute the request
-      And I store the response
-      And I store the '_id' as '{meetingId}'
+      And I store the 'id' as '{invalidId}'
 
-  Scenario: Retrieve a specific meeting for an 'organizer' field that
-  was set with a valid 'room' email
-    When I make a 'GET' request to '/meetings/{meetingId}'
-      And I change the "value" of "Credentials" to ""
+  Scenario: Retrieve a specific meeting using an invalid id
+    When I make a 'GET' request to '/meetings/{invalidId}'
       And I execute the request
       And after build a expected response with the fields:
         | _id               |
         | organizer         |
         | subject           |
-        | owner             |
         | body              |
         | start             |
         | end               |
@@ -42,5 +37,12 @@ Feature: Get /meetings
         | attendees         |
         | optionalAttendees |
 
-    Then I expect a '200' status code
-      And the built response should be equal to the obtained response
+    Then I expect a '404' status code
+      And the JSON should be:
+        """
+          {
+            "name" : "MeetingNotFoundError",
+            "description" : "The meeting doesn't exist in the database."
+          }
+        """
+

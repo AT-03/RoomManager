@@ -1,7 +1,7 @@
 # Author: Daniel Montecinos
 
-@crud
-Feature: CRUD
+@rm @meetings @crud
+Feature: Get /meetings
 
   @delete_meetings
   Scenario: Retrieve all the created meetings

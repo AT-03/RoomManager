@@ -1,10 +1,10 @@
 # Author: Daniel Montecinos
 
-@rm @meetings @crud
-Feature: GET /meetings
+@rm @meetings @functional @get @issue
+Feature: GET /meetings/{meetingId}
 
-  Background: Create a meeting and set owner with a 'user' email
-  and store its id
+  Background: Create a meeting setting a valid 'user' as a value
+  for 'organizer' field and store its id
     Given I make a 'POST' request to '/meetings'
       And I set this body:
         """
@@ -25,19 +25,10 @@ Feature: GET /meetings
       And I store the response
       And I store the '_id' as '{meetingId}'
 
-  Scenario: Retrieve a specific meeting
+  Scenario: Try to retrieve a specific meeting using a valid id
+  without use credentials
     When I make a 'GET' request to '/meetings/{meetingId}'
+      And I change the "value" of "Credentials" to ""
       And I execute the request
-      And after build a expected response with the fields:
-        | _id               |
-        | organizer         |
-        | subject           |
-        | body              |
-        | start             |
-        | end               |
-        | rooms             |
-        | attendees         |
-        | optionalAttendees |
 
-    Then I expect a '200' status code
-      And the built response should be equal to the obtained response
+      Then I expect a '400' status code
