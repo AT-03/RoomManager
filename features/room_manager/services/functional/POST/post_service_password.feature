@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative
+@rm @services @functional @negative
 Feature: POST a new service with password field
 
   @delete_services
@@ -8,7 +8,7 @@ Feature: POST a new service with password field
       And I set this body:
               """
               {
-                "hostname": "server2012dc.ArabITPro.local",
+                "hostname": "server2012dc.arabitpro.local",
                 "username": "Administrator",
                 "password": <password>,
                 "deleteLockTime": 10

@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @positive
+@rm @services @functional @positive
 Feature: PUT an existing service
 
   Background: Create a service

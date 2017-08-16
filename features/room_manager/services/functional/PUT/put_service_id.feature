@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative
+@rm @services @functional @negative
 Feature: PUT an existing service with id field
 
   Scenario Outline: Update a service created using id field
@@ -16,7 +16,7 @@ Feature: PUT an existing service with id field
       And I replace the values of the body request
     When I execute the request
     Then I expect a '<status>' status code
-    And the JSON should be:
+      And the JSON should be:
               """
               {
                 "name": "<response_name>",

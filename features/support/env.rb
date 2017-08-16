@@ -134,7 +134,6 @@ class Env
     @sleep = config['Time']['time']
   end
 
-
   def self.user
     config = load_file
     config['user']['user']
@@ -143,6 +142,11 @@ class Env
   def self.password
     config = load_file
     config['user']['password']
+  end
+
+  def self.exchange_server
+    config = load_file
+    config['Exchange-Server']['host']
   end
 end
 

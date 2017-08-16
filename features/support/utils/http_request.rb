@@ -20,11 +20,6 @@ class HttpRequest
   # Daniel Montecinos
   # Use this method if you want to change the values set by default.
   def add_header_field(new_key, value)
-    # @header.delete_if do |key|
-    #   key = key.to_s
-    #   new_key.end_with?(key) || new_key.equal?(key)
-    # end
-
     @header.store(new_key, value)
   end
 

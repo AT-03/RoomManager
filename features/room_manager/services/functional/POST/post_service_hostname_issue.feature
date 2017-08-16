@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative @issue
+@rm @services @functional @negative @issue
 Feature: POST a service with a hostname
 
   Scenario Outline: Create a service with a hostname

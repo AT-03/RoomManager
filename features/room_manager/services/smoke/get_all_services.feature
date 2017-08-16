@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@smoke @positive
+@rm @services @smoke @positive
 Feature: GET request to all rooms
 
   @delete_services
