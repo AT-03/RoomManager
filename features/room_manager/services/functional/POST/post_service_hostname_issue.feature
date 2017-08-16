@@ -4,18 +4,19 @@ Feature: POST a service with a hostname
 
   Scenario Outline: Create a service with a hostname
     Given I make a 'POST' request to '/services'
-    And I set this body:
+      And I set this body:
           """
           {
             "hostname": <hostname>,
-            "username": "Administrator",
-            "password": "P@ssw0rd",
+            "username": "Env.user",
+            "password": "Env.password",
             "deleteLockTime": 11
           }
           """
+      And I replace the values of the body request
     When I execute the request
     Then I expect a '<status>' status code
-    And the JSON should be:
+      And the JSON should be:
           """
           {
             "name":"<response_name>",

@@ -5,18 +5,19 @@ Feature: POST a new service with username field
   @delete_services
   Scenario Outline: Create a new service using username field
     Given I make a 'POST' request to '/services'
-    And I set this body:
+      And I set this body:
             """
             {
-              "hostname": "server2012dc.ArabITPro.local",
+              "hostname": "Env.hostname",
               "username": <username>,
-              "password": "P@ssw0rd",
-              "deleteLockTime": 10
+              "password": "Env.password",
+              "deleteLockTime": 11
             }
             """
+      And I replace the values of the body request
     When I execute the request
-    Then I expect a '400' status code
-    And the JSON should be:
+    Then I expect a '<status>' status code
+      And the JSON should be:
               """
               {
                 "name":"<response_name>",
@@ -24,8 +25,8 @@ Feature: POST a new service with username field
               }
               """
     Examples:
-      | username                                                                                                                                                                                                                                                                                                                           | response_name           | response_description                                  |
-      | ""                                                                                                                                                                                                                                                                                                                                 | ValidationError         | data.username should NOT be shorter than 1 characters |
-      | "Incorrect"                                                                                                                                                                                                                                                                                                                        | InvalidCredentialsError | The credentials entered are not correct               |
-      | "Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_" | InvalidCredentialsError | The credentials entered are not correct               |
-      | 2017                                                                                                                                                                                                                                                                                                                               | ValidationError         | data.username should be string                        |
+      | status | username                                                                                                                                                                                                                                                                                                                           | response_name             | response_description                                                                                              |
+      | 400    | ""                                                                                                                                                                                                                                                                                                                                 | ValidationError           | data.username should NOT be shorter than 1 characters                                                             |
+      | 409    | "Incorrect"                                                                                                                                                                                                                                                                                                                        | RequestNetBIOSDomainError | Can't connect to LDAP server, please ensure the NetBIOS domain is correct and your computer belongs to the domain |
+      | 409    | "Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_Incorrect_value_" | RequestNetBIOSDomainError | Can't connect to LDAP server, please ensure the NetBIOS domain is correct and your computer belongs to the domain |
+      | 400    | 2017                                                                                                                                                                                                                                                                                                                               | ValidationError           | data.username should be string                                                                                    |

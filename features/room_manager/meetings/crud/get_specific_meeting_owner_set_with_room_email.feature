@@ -1,7 +1,7 @@
 # Author: Daniel Montecinos
 
 @crud
-Feature: SMOKE
+Feature: CRUD
 
   Background: Create a meeting and set owner with a 'room' email
   and store its id

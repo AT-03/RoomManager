@@ -22,5 +22,5 @@ Feature: DELETE an existing service
     Given I make a 'DELETE' request to '/services/{serviceId}'
     When I execute the request
     Then I expect a '200' status code
-      And the JSON response should not include the field "_id"
+      And the response should not include the field "_id"
 

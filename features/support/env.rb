@@ -90,7 +90,7 @@ class Env
   # Author: Pablo Ramirez
   def self.key_header_es
     config = load_file
-    @header = config['Subscriptions']['Exchange-Calendar']
+    @header = config['Subscriptions']['Exchange-Credentials']
     # Author: Pablo Ramirez
   end
 
@@ -117,7 +117,7 @@ class Env
     config = load_file
     @server = config['general_data']['server']
     @domain = config['general_data']['domain']
-    @host = "#{@server}.#{@domain}"
+    "#{@server}.#{@domain}"
   end
 
   # Author: Pablo Ramirez
@@ -131,7 +131,18 @@ class Env
   # Author: Pablo Ramirez
   def self.timer
     config = load_file
-    @sleep = config['Sleep']['time']
+    @sleep = config['Time']['time']
+  end
+
+
+  def self.user
+    config = load_file
+    config['user']['user']
+  end
+
+  def self.password
+    config = load_file
+    config['user']['password']
   end
 end
 

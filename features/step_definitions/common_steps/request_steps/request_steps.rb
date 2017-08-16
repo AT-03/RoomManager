@@ -57,7 +57,6 @@ And(/^the built response should be equal to the obtained response$/) do
   expect(@built_response.to_json).to be_json_eql(@last_json.body)
 end
 
-# Author: Daniel Montecinos
 # Author: Pablo Ramirez
 Given(/^I have obtained roomsId for '([^\n]+)' from '(\w+)' of the table '(\w+)'$/) do |value, key, endpoint|
   @bson = @db_rm.find_element(endpoint, key, value)
@@ -100,4 +99,11 @@ end
 # Author: Daniel Montecinos
 And(/^the built expected response should be equal to the obtained response$/) do
   expect(@body.to_json).to be_json_eql(@json.body).excluding("rooms")
+end
+
+And(/^I replace the values of the body request$/) do
+  @body.map do |key, value|
+    @body[key] = eval(value) if value.eql?(String)
+  end
+  @http.add_body(@body.to_json)
 end

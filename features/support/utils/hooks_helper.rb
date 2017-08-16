@@ -16,6 +16,7 @@ module Hooks_helper
       build_request body, endpoint, method
       @http.add_header_field key_header, value_header
       @http.build_url
+      Helper.timer Env.timer
       RequestManager.execute_request @http
     end
   end

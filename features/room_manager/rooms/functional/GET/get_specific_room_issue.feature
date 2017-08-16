@@ -6,7 +6,7 @@ Feature: Get a specific room using id
     Given I make a 'GET' request to '/rooms/<id>'
     When I execute the request
     Then I expect a '<status>' status code
-    And the JSON should be:
+      And the JSON should be:
               """
               {
                 "name":"<response_name>",

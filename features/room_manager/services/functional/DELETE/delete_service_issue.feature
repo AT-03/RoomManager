@@ -4,7 +4,7 @@ Feature: DELETE an existing service with id field
 
   Background: Create a service
     Given I make a 'POST' request to '/services'
-    And I set this body:
+      And I set this body:
                   """
                   {
                     "hostname": "server2012dc.ArabITPro.local",
@@ -21,13 +21,13 @@ Feature: DELETE an existing service with id field
     Given I make a 'DELETE' request to '/services/<id>'
     When I execute the request
     Then I expect a '<status>' status code
-    And the JSON should be:
-        """
-        {
-          "name": "<response_name>",
-          "description": "<response_description>"
-        }
-        """
+      And the JSON should be:
+          """
+          {
+            "name": "<response_name>",
+            "description": "<response_description>"
+          }
+          """
     Examples:
       | id          | status | response_name | response_description |
       |             | 404    | NotFound      |                      |

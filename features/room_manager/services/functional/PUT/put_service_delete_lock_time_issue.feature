@@ -4,14 +4,15 @@ Feature: PUT an existing service an empty deleteLockTime
   Background: Create a service
     Given I make a 'POST' request to '/services'
       And I set this body:
-                """
-                {
-                  "hostname": "server2012dc.ArabITPro.local",
-                  "username": "Administrator",
-                  "password": "P@ssw0rd",
-                  "deleteLockTime": 10
-                }
-                """
+            """
+            {
+              "hostname": "Env.hostname",
+              "username": "Env.user",
+              "password": "Env.password",
+              "deleteLockTime": 11
+            }
+            """
+      And I replace the values of the body request
     When I execute the request
       And I store the '_id' as '{serviceId}'
 
@@ -19,13 +20,14 @@ Feature: PUT an existing service an empty deleteLockTime
   Scenario: Update a service created using an empty deleteLockTime
     Given I make a 'PUT' request to '/services/{serviceId}'
       And I set this body:
-              """
-              {
-                "username": "Administrator",
-                "password": "P@ssw0rd",
-                "deleteLockTime":
-              }
             """
+            {
+              "username": "Env.user",
+              "password": "Env.password",
+              "deleteLockTime":
+            }
+            """
+      And I replace the values of the body request
     When I execute the request
     Then I expect a '400' status code
       And the JSON should be:
