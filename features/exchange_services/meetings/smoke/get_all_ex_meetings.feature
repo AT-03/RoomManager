@@ -9,7 +9,6 @@ Feature: SMOKE, GET request to all exchanges meetings
       | start | 2019-09-01T00:00:00.000Z |
       | end   | 2019-09-31T23:59:59.000Z |
     And I set this headers exchange:
-      | Content-type         | application/json |
       | Exchange-Credentials | 'Env.password'   |
       | Exchange-Calendar    | 'Env.user_mail'  |
     When I execute the request

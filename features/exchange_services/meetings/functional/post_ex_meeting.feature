@@ -59,7 +59,7 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
             {
               "name": "SchemaValidationError",
-              "description": "data should have required property 'attendees'"
+              "description": "data.attendees should be array"
             }
           """
 
@@ -195,7 +195,7 @@ Feature: FUNCTIONAL, post the exchange meeting
         "end": "2017-09-25T17:00:00.00Z",
         "location": "Arani",
         "attendees":[],
-        "optional"
+        "optionalAttendees":[]
       }
       """
     And I execute the request
@@ -222,16 +222,16 @@ Feature: FUNCTIONAL, post the exchange meeting
         "end": "2017-09-25T17:00:00.00Z",
         "location": "Arani",
         "attendees":[],
-        "optional"
+        "optionalAttendees":[]
       }
       """
     And I execute the request
-    Then I expect a '400' status code
+    Then I expect a '404' status code
     And a response body as:
     """
         {
-        "name": "UnauthorizedExchangeError",
-        "description": "The provided credentials are incorrect."
+        "name": "AccountNotFoundError",
+         "description": "The exchange account doesn't exist."
         }
     """
 
@@ -273,7 +273,7 @@ Feature: FUNCTIONAL, post the exchange meeting
         """
         {
           "subject": "",
-          "body":""
+          "body":"",
           "start": "2018-09-25T16Z",
           "end": "2018-09-29T17Z",
           "location": "arani",
@@ -290,8 +290,10 @@ Feature: FUNCTIONAL, post the exchange meeting
     Then I expect a '400' status code
     And a response body as:
         """
+         {
           "name": "SchemaValidationError",
           "description": "data.start should match format \"date-time\""
+           }
         """
 
 

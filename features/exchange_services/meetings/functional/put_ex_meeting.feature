@@ -121,12 +121,12 @@ Feature: FUNCTIONAL, put request for different cases.
             }
             """
     And I execute the request
-    Then I expect a '401' status code
+    Then I expect a '400' status code
     And a response body as:
           """
             {
-              "name": "UnauthorizedExchangeError",
-              "description": "The provided credentials are incorrect."
+              "name": "SchemaValidationError",
+              "description": "data.attendees should be array"
             }
           """
 
@@ -175,7 +175,7 @@ Feature: FUNCTIONAL, put request for different cases.
             """
               {
                "description": "data.attendees should be array",
-                "name": "SchemaValidationError
+                "name": "SchemaValidationError"
               }
             """
 
@@ -369,8 +369,8 @@ Feature: FUNCTIONAL, put request for different cases.
     And a response body as:
         """
           {
-            "name": "MeetingNotFoundError",
-            "description": "The meeting doesn't exist in the database."
+            "description": "The meetingId 'invalidmeetingId' argument passed in must be a String of 12 bytes or a string of 24 hex characters.",
+            "name": "InvalidIdFormatError"
           }
         """
 
@@ -405,7 +405,7 @@ Feature: FUNCTIONAL, put request for different cases.
 
   @negative @meetings
   Scenario: update a exchanges meeting without body in the json.
-    Given I make a 'PUT' request to '/meetings/{meetingId1}'
+    Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
       | Exchange-Credentials | Env.password  |
       | Exchange-Calendar    | Env.user_mail |
@@ -426,7 +426,7 @@ Feature: FUNCTIONAL, put request for different cases.
         """
 
     And I execute the request
-    Then I expect a '401' status code
+    Then I expect a '400' status code
     And a response body as:
         """
           {
@@ -473,23 +473,23 @@ Feature: FUNCTIONAL, put request for different cases.
     Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
       | Exchange-Credentials | Env.invalid_credential |
-      | Exchange-Calendar    | Env.invalid_exchange   |
+      | Exchange-Calendar    | Env.invalid_exchange  |
     And I set this body:
-          """
-          {
-            "subject":"",
-            "body": "",
-            "start": "2017-09-25T16:00:00.00Z",
-            "end": "2017-09-25T17:00:00.00Z",
-            "location": "Arani",
-            "attendees": [
-            "administrator@arabitpro.local"
-            ],
-            "optionalAttendees": [
-            "stacy.hirano@server.lab"
-            ]
-          }
-           """
+         """
+        {
+          "subject": "",
+          "body": "",
+          "start": "2017-09-25T16:00:00.00Z",
+          "end": "2017-09-25T17:00:00.00Z",
+          "location": "Arani",
+          "attendees": [
+          "administrator@arabitpro.local"
+          ],
+          "optionalAttendees": [
+          "stacy.hirano@server.lab"
+          ]
+        }
+        """
 
     And I execute the request
     Then I expect a '400' status code

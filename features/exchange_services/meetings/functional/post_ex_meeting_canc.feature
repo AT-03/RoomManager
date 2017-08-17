@@ -39,11 +39,8 @@ Feature: FUNCTIONAL, post cancelation request with different option.
           "start": "2017-09-25T16:00:00.00Z",
           "end": "2017-09-25T17:00:00.00Z",
           "location": "",
-          "attendees": [
-          ],
-          "optionalAttendees": [
-
-          ]
+          "attendees": [],
+          "optionalAttendees": []
         }
         """
 
@@ -52,7 +49,7 @@ Feature: FUNCTIONAL, post cancelation request with different option.
     And the JSON response at "isCanceled" should be false
 
 
-  Scenario: post cancelation request without body
+  Scenario: post cancelation request without body total
     When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
     And I set this headers exchange:
       | Exchange-Credentials | Env.password  |
@@ -60,7 +57,17 @@ Feature: FUNCTIONAL, post cancelation request with different option.
     And I set this body:
           """
           {
-
+              "subject":"",
+              "body":"",
+              "start":"2017-09-25T17:00:00.00Z",
+              "end": "2017-09-25T17:00:00.00Z",
+              "location": "Arani",
+              "attendees": [
+              "candace.flynn@server.lab"
+              ],
+               "optionalAttendees": [
+               "stacy.hirano@server.lab"
+              ]
           }
           """
 
@@ -93,6 +100,13 @@ Feature: FUNCTIONAL, post cancelation request with different option.
 
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+        """
+          {
+            "description": "The meetingId 'invalidmeetingId' argument passed in must be a String of 12 bytes or a string of 24 hex characters.",
+            "name": "InvalidIdFormatError"
+          }
+        """
 
   Scenario: post cancelation request with date incorrect(29/02)
     When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
@@ -118,10 +132,17 @@ Feature: FUNCTIONAL, post cancelation request with different option.
 
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+        """
+           {
+            "name": "SchemaValidationError",
+            "description": "data.start should match format \"date-time\""
+            }
+        """
 
 
   Scenario: post cancelation request with date empty
-    When I make a 'POST' request to '/meetings/{meetingId1}/cancellation'
+    When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
     And I set this headers exchange:
       | Exchange-Credentials | Env.password  |
       | Exchange-Calendar    | Env.user_mail |
@@ -144,10 +165,17 @@ Feature: FUNCTIONAL, post cancelation request with different option.
 
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+        """
+           {
+            "name": "SchemaValidationError",
+            "description": "data.start should match format \"date-time\""
+            }
+        """
 
 
   Scenario: post cancelation request with body empty
-    When I make a 'POST' request to '/meetings/{meetingId1}/cancellation'
+    When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
     And I set this headers exchange:
       | Exchange-Credentials | Env.password  |
       | Exchange-Calendar    | Env.user_mail |
@@ -171,7 +199,7 @@ Feature: FUNCTIONAL, post cancelation request with different option.
   Scenario: post cancelation request with exchange credential invalid
     When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.invalid_credential |
+      | Exchange-Credentials | Env.invalid |
       | Exchange-Calendar    | Env.user_mail          |
     And I set this body:
           """
