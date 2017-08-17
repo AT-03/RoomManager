@@ -40,7 +40,6 @@ end
 Then(/^I store the '(_?\w+)' as '(?:.+)'$/) do |key|
   @value = Helper.get_value(key, @json.body)
   @key = key
-  puts @value
 end
 
 # Author: Daniel Montecinos
