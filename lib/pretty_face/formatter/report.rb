@@ -21,9 +21,7 @@ module PrettyFace
 
       def table_image_for(status, source=nil)
         var= File.dirname(__dir__)+"/templates"
-        # puts "REAL DIRECTORY>>#{File.dirname(__dir__)+"/templates"}"
         dir = "#{directory_prefix_for(source)}images"
-        # puts "<<<<<DIRECTORY>>#{dir}"
         "<img src=\"#{var}/table_#{status}.png\" alt=\"#{status}\" title=\"#{status}\">"
 
       end
