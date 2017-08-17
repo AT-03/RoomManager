@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative
+@rm @services @functional @negative
 Feature: PUT an existing service a password field
 
   Background: Create a service
@@ -23,15 +23,14 @@ Feature: PUT an existing service a password field
       And I set this body:
           """
           {
-            "username": "Env.user",
+            "username": "Administrator",
             "password": <password>,
             "deleteLockTime": 11
           }
           """
-      And I replace the values of the body request
     When I execute the request
     Then I expect a '400' status code
-    And the JSON should be:
+      And the JSON should be:
               """
               {
                 "name": "<response_name>",

@@ -1,3 +1,4 @@
+# Autor: Daniel Cabero
 require 'pathname'
 require 'yaml'
 require 'json_spec/cucumber'
@@ -134,7 +135,6 @@ class Env
     @sleep = config['Time']['time']
   end
 
-
   def self.user
     config = load_file
     config['user']['user']
@@ -142,8 +142,31 @@ class Env
 
   def self.password
     config = load_file
-    config['user']['password']
+    Base64.encode64(config['user']['encode'])
   end
+
+  def self.exchange_server
+    config = load_file
+    config['Exchange-Server']['host']
+  end
+
+  def self.user_mail
+    config = load_file
+    config['user']['mail']
+  end
+
+  # this method is for the negative test.
+  def self.invalid_credential
+    config = load_file
+    config['invalid']['credential']
+  end
+
+  def self.invalid_exchange
+    config = load_file
+    config['invalid']['user']
+  end
+
+
 end
 
 

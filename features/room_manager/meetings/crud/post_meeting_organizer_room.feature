@@ -1,7 +1,7 @@
 # Author: Daniel Montecinos
 
-@crud
-Feature: CRUD
+@rm @meetings @crud
+Feature: POST /meetings
 
   Scenario: Create a meeting setting the field 'organizer' with a valid 'room' email
     Given I make a 'POST' request to '/meetings'

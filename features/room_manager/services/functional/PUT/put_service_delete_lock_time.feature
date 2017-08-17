@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative
+@rm @services @functional @negative
 Feature: PUT an existing service with deleteLockTime field
 
   Background: Create a service
@@ -15,7 +15,7 @@ Feature: PUT an existing service with deleteLockTime field
           """
       And I replace the values of the body request
     When I execute the request
-    And I store the '_id' as '{serviceId}'
+      And I store the '_id' as '{serviceId}'
 
   @delete_services
   Scenario Outline: Update a service created using deleteLockTime field

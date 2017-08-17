@@ -1,18 +1,19 @@
 # Author: Pablo Ramirez
-@functional @negative @issue
+@rm @services @functional @negative @issue
 Feature: DELETE an existing service with id field
 
   Background: Create a service
     Given I make a 'POST' request to '/services'
       And I set this body:
-                  """
-                  {
-                    "hostname": "server2012dc.ArabITPro.local",
-                    "username": "Administrator",
-                    "password": "P@ssw0rd",
-                    "deleteLockTime": 11
-                  }
-                  """
+        """
+        {
+          "hostname": "Env.hostname",
+          "username": "Env.user",
+          "password": "Env.password",
+          "deleteLockTime": 11
+        }
+        """
+      And I replace the values of the body request
     When I execute the request
     Then I store the '_id' as '{serviceId}'
 

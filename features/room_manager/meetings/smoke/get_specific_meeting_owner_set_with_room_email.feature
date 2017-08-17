@@ -1,7 +1,7 @@
 # Author: Daniel Montecinos
 
-@smoke
-Feature: SMOKE
+@rm @meetings @smoke
+Feature: Get /meetings
 
   Background: Create a meeting, set a 'room' email as a value for 'organizer'
   and store its id

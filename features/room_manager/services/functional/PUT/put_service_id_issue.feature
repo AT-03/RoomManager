@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative @issue
+@rm @services @functional @negative @issue
 Feature: PUT an existing service with a empty id
 
   Scenario: Update a service created using a incorrect id

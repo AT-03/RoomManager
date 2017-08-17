@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative @issue
+@rm @rooms @functional @negative @issue
 Feature: Get all rooms using field "to"
 
   Scenario Outline: Retrieve all rooms using field "to"

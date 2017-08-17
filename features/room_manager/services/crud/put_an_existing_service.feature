@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@crud
+@rm @services @crud
 Feature: PUT an existing service
 
   Background: Create a service

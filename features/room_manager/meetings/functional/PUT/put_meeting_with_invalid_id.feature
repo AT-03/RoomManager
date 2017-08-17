@@ -1,6 +1,7 @@
 # Author: Daniel Montecinos
 
-Feature: FUNCTIONAL
+@rm @meetings @functional @put @negative
+Feature: PUT /meetings/{meetingId}
 
   Background: Create a meeting an store its id
     Given I make a 'POST' request to '/meetings'

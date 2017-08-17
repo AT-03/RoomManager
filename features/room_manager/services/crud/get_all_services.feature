@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@crud
+@rm @services @crud
 Feature: GET request to all rooms
 
   @delete_services

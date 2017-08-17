@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative @issue
+@rm @rooms @functional @negative @issue
 Feature: Get a specific room using id
 
   Scenario Outline: Retrieve a specific room using id

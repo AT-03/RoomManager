@@ -1,7 +1,7 @@
 # Author: Daniel Montecinos
 
-@crud
-Feature: CRUD
+@rm @meetings @crud
+Feature: GET /meetings
 
   Background: Create a meeting and set owner with a 'room' email
   and store its id

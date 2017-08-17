@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative
+@rm @services @functional @negative
 Feature: DELETE an existing service
 
   @delete_services

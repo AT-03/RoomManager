@@ -8,10 +8,6 @@ class Helper
     JSON.pretty_generate(JSON[json_string])
   end
 
-  def self.get_json_value(json, key)
-    parse_to_json(json).fetch(key)
-  end
-
   def self.encode_credentials(credentials)
     Base64.encode64(credentials)
   end
@@ -21,7 +17,6 @@ class Helper
     if endpoint.include?('{')
       parsed_response = parse_to_json(response)
 
-      # invalid_id = '0eee25f78cb9c904b430d84f'
       invalid_id = SecureRandom.hex(12)
       value = parsed_response.key?(key) ? parsed_response[key] : invalid_id
 

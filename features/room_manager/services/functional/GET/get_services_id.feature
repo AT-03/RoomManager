@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative
+@rm @services @functional @negative
 Feature: GET request to room using an incorrect id query
 
   Scenario: Retrieve a room using an incorrect id query

@@ -1,5 +1,5 @@
 # Author: Pablo Ramirez
-@functional @negative @issue
+@rm @services @functional @negative @issue
 Feature: PUT an existing service an empty deleteLockTime
   Background: Create a service
     Given I make a 'POST' request to '/services'
