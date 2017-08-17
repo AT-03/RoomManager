@@ -8,10 +8,6 @@ class Helper
     JSON.pretty_generate(JSON[json_string])
   end
 
-  def self.get_json_value(json, key)
-    parse_to_json(json).fetch(key)
-  end
-
   def self.encode_credentials(credentials)
     Base64.encode64(credentials)
   end
