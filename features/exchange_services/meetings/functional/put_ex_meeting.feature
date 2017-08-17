@@ -6,9 +6,8 @@ Feature: FUNCTIONAL, put request for different cases.
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
 
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -28,12 +27,12 @@ Feature: FUNCTIONAL, put request for different cases.
     And I execute the request
     And I store the '_id' as '{meetingId}'
 
+  @positive @meetings
   Scenario: put request without attenders.
     When I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
         {
@@ -50,9 +49,9 @@ Feature: FUNCTIONAL, put request for different cases.
         """
     And I execute the request
     Then I expect a '200' status code
-    And the response should be:
-      """
-        {
+    And a response body excluide as:
+        """
+          {
           "subject": "Scrum",
           "body": "Scrum of Room Manager",
           "start": "2017-10-25T16:00:00.00Z",
@@ -62,15 +61,15 @@ Feature: FUNCTIONAL, put request for different cases.
           ],
           "optionalAttendees": [
           ]
-        }
+          }
         """
 
+  @positive @meetings
   Scenario:put request with attenders empty .
     When I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -87,13 +86,28 @@ Feature: FUNCTIONAL, put request for different cases.
       """
     And I execute the request
     Then I expect a '200' status code
+    And a response body excluide as:
 
+    """
+      {
+        "subject": "Scrum",
+        "body": "Scrum of Room Manager",
+        "start": "2017-09-25T16:00:00.00Z",
+        "end": "2017-09-25T17:00:00.00Z",
+        "location": "",
+        "attendees": [
+               ],
+        "optionalAttendees": [ "AT03@arabitpro.local"
+        ]
+      }
+      """
+
+  @negative @meetings
   Scenario:put request with account incorrect.
     When I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json  |
-      | Exchange-Credentials | credentialInvalid |
-      | Exchange-Calendar    | mail_account      |
+      | Exchange-Credentials | Env.password         |
+      | Exchange-Calendar    | Env.invalid_exchange |
     And I set this body:
           """
             {
@@ -108,13 +122,20 @@ Feature: FUNCTIONAL, put request for different cases.
             """
     And I execute the request
     Then I expect a '401' status code
+    And a response body as:
+          """
+            {
+              "name": "UnauthorizedExchangeError",
+              "description": "The provided credentials are incorrect."
+            }
+          """
 
+  @negative @meetings
   Scenario:put request with empty body.
     When I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
           """
             {
@@ -122,13 +143,20 @@ Feature: FUNCTIONAL, put request for different cases.
             """
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+          """
+            {
+              "name": "SchemaValidationError",
+              "description": "data should have required property 'attendees'"
+            }
+          """
 
+  @negative @meetings
   Scenario:put request with invalid date.
     When I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
           """
             {
@@ -143,20 +171,20 @@ Feature: FUNCTIONAL, put request for different cases.
             """
     And I execute the request
     Then I expect a '400' status code
-    And the response should be:
+    And a response body as:
             """
               {
-              "name": "ExchangeError",
-              "description": "The specified date isn't valid."
+               "description": "data.attendees should be array",
+                "name": "SchemaValidationError
               }
             """
 
-  Scenario:put request with empty body.
+  @negative @meetings
+  Scenario:put request with empty body and invalid credential.
     When I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.invalid_credential |
+      | Exchange-Calendar    | Env.user_mail          |
     And I set this body:
           """
             {
@@ -164,7 +192,7 @@ Feature: FUNCTIONAL, put request for different cases.
             """
     And I execute the request
     Then I expect a '400' status code
-    And the response should be:
+    And a response body as:
           """
             {
               "name": "SchemaValidationError",
@@ -172,12 +200,12 @@ Feature: FUNCTIONAL, put request for different cases.
             }
           """
 
+  @negative @meetings
   Scenario: : Create a exchanges meeting with date incorrect(29/02)
     Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -197,7 +225,7 @@ Feature: FUNCTIONAL, put request for different cases.
 
     And I execute the request
     Then I expect a '400' status code
-    And the response should be:
+    And a response body as:
         """
           {
               "name": "ExchangeError",
@@ -205,12 +233,12 @@ Feature: FUNCTIONAL, put request for different cases.
           }
         """
 
+  @positive @meetings
   Scenario: update a exchanges meeting with invalid date without location
     Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -230,9 +258,9 @@ Feature: FUNCTIONAL, put request for different cases.
 
     And I execute the request
     Then I expect a '200' status code
-    And the response should be:
-        """
-          {
+    And a response body excluide as:
+         """
+        {
           "subject": "Scrum",
           "body": "Scrum of Room Manager",
           "start": "2018-09-25T16:00:00.00Z",
@@ -247,12 +275,12 @@ Feature: FUNCTIONAL, put request for different cases.
         }
         """
 
+  @negative @meetings
   Scenario: update a exchanges meeting without start time and end time.
     Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -272,7 +300,7 @@ Feature: FUNCTIONAL, put request for different cases.
 
     And I execute the request
     Then I expect a '400' status code
-    And the response should be:
+    And a response body as:
         """
           {
             "name": "SchemaValidationError",
@@ -280,12 +308,12 @@ Feature: FUNCTIONAL, put request for different cases.
           }
         """
 
+  @negative @meetings
   Scenario: update a exchanges meeting with start, end time empty.
     Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -305,13 +333,20 @@ Feature: FUNCTIONAL, put request for different cases.
 
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+    """
+        {
+        "name": "SchemaValidationError",
+        "description": "data.start should match format \"date-time\""
+        }
+    """
 
+  @negative @meetings
   Scenario: update a exchanges meeting with invalid meeting id
-    Given I make a 'PUT' request to '/meetings/meetingId1'
+    Given I make a 'PUT' request to '/meetings/invalidmeetingId'
     And I set this headers exchange:
-      | Content-type         | application/json  |
-      | Exchange-Credentials | credentialInvalid |
-      | Exchange-Calendar    | mail_account      |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -331,7 +366,7 @@ Feature: FUNCTIONAL, put request for different cases.
 
     And I execute the request
     Then I expect a '400' status code
-    And the response should be:
+    And a response body as:
         """
           {
             "name": "MeetingNotFoundError",
@@ -339,12 +374,12 @@ Feature: FUNCTIONAL, put request for different cases.
           }
         """
 
+  @negative @meetings
   Scenario: update a exchanges meeting without subject and body
     Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -360,7 +395,7 @@ Feature: FUNCTIONAL, put request for different cases.
 
     And I execute the request
     Then I expect a '400' status code
-    And the response should be:
+    And a response body as:
         """
           {
             "name": "SchemaValidationError",
@@ -368,12 +403,12 @@ Feature: FUNCTIONAL, put request for different cases.
           }
         """
 
-  Scenario: update a exchanges meeting without body
+  @negative @meetings
+  Scenario: update a exchanges meeting without body in the json.
     Given I make a 'PUT' request to '/meetings/{meetingId1}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -392,7 +427,7 @@ Feature: FUNCTIONAL, put request for different cases.
 
     And I execute the request
     Then I expect a '401' status code
-    And the response should be:
+    And a response body as:
         """
           {
             "name": "SchemaValidationError",
@@ -400,12 +435,12 @@ Feature: FUNCTIONAL, put request for different cases.
           }
         """
 
+  @negative @meetings
   Scenario: update a exchanges meeting without body, subject empty and invalid credential
     Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json  |
-      | Exchange-Credentials | credentialInvalid |
-      | Exchange-Calendar    | mail_account      |
+      | Exchange-Credentials | Env.invalid_credential |
+      | Exchange-Calendar    | Env.user_mail          |
     And I set this body:
         """
         {
@@ -425,60 +460,43 @@ Feature: FUNCTIONAL, put request for different cases.
 
     And I execute the request
     Then I expect a '401' status code
-    And the response should be:
-        """
-         "subject": "",
-          "body":""
-          "start": "2018-09-25T16:00:00.00Z",
-          "end": "2018-09-29T17:00:00.00Z",
-          "location": "arani",
-          "attendees": [
-          "administrator@arabitpro.local"
-          ],
-          "optionalAttendees": [
-          "stacy.hirano@server.lab"
-          ]
-        """
+    And a response body as:
+      """
+        {
+        "name": "UnauthorizedExchangeError",
+        "description": "The provided credentials are incorrect."
+        }
+      """
 
-  Scenario: example update a exchanges meeting without body, subject empty and invalid credential
+  @negative @meetings
+  Scenario: example update a exchanges meeting without body, subject empty, invalid credential and invalid account
     Given I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_user        |
-
+      | Exchange-Credentials | Env.invalid_credential |
+      | Exchange-Calendar    | Env.invalid_exchange   |
     And I set this body:
-        """
-        {
-          "subject":"",
-          "body": "",
-          "start": "2017-09-25T16:00:00.00Z",
-          "end": "2017-09-25T17:00:00.00Z",
-          "location": "Arani",
-          "attendees": [
-          "administrator@arabitpro.local"
-          ],
-          "optionalAttendees": [
-          "stacy.hirano@server.lab"
-          ]
-        }
-        """
-#    And I load headers exchanges
+          """
+          {
+            "subject":"",
+            "body": "",
+            "start": "2017-09-25T16:00:00.00Z",
+            "end": "2017-09-25T17:00:00.00Z",
+            "location": "Arani",
+            "attendees": [
+            "administrator@arabitpro.local"
+            ],
+            "optionalAttendees": [
+            "stacy.hirano@server.lab"
+            ]
+          }
+           """
+
     And I execute the request
-    Then I expect a '200' status code
-#    And the response should be:
-#        """{
-#           "subject":"",
-#          "body": "",
-#          "start": "2017-09-25T16:00:00.00Z",
-#          "end": "2017-09-25T17:00:00.00Z",
-#          "location": "Arani",
-#          "attendees": [
-#          "administrator@arabitpro.local"
-#          ],
-#          "optionalAttendees": [
-#          "stacy.hirano@server.lab"
-#          ]
-#          }
-#        """
-#
+    Then I expect a '400' status code
+    And a response body as:
+      """
+        {
+        "name": "UnauthorizedExchangeError",
+        "description": "The provided credentials are incorrect."
+        }
+      """

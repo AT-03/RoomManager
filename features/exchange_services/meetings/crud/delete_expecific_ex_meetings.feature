@@ -5,9 +5,8 @@ Feature: CRUD, delete request expecific exchanges meeting.
   Background:  Create a exchanges meeting
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json              |
-      | Exchange-Credentials | credentialId                  |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -30,8 +29,7 @@ Feature: CRUD, delete request expecific exchanges meeting.
   Scenario: Delete expecific exchanges meeting
     When I make a 'DELETE' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json              |
-      | Exchange-Credentials | credentialId                  |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I execute the request
     Then I expect a '200' status code

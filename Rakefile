@@ -47,6 +47,54 @@ task :@functional do
   end
 end
 
+task :@positive do
+  Cucumber::Rake::Task.new :positive do |t|
+    t.profile = 'default'
+    sh 'cucumber --tags @positive --format PrettyFace::Formatter::Html --out test_reports/positive.html'
+  end
+end
+
+task :@negative do
+  Cucumber::Rake::Task.new :negative do |t|
+    t.profile = 'default'
+    sh 'cucumber --tags @negative --format PrettyFace::Formatter::Html --out test_reports/negative.html'
+  end
+end
+task :@rm do
+  Cucumber::Rake::Task.new :rm do |t|
+    t.profile = 'default'
+    sh 'cucumber --tags @rm --format PrettyFace::Formatter::Html --out test_reports/rm.html'
+  end
+end
+
+task :@rooms do
+  Cucumber::Rake::Task.new :rooms do |t|
+    t.profile = 'default'
+    sh 'cucumber --tags @rooms --format PrettyFace::Formatter::Html --out test_reports/rooms.html'
+  end
+end
+
+task :@services do
+  Cucumber::Rake::Task.new :services do |t|
+    t.profile = 'default'
+    sh 'cucumber --tags @services --format PrettyFace::Formatter::Html --out test_reports/services.html'
+  end
+end
+
+task :@meetings do
+  Cucumber::Rake::Task.new :meetings do |t|
+    t.profile = 'default'
+    sh 'cucumber --tags @meetings --format PrettyFace::Formatter::Html --out test_reports/meetings.html'
+  end
+end
+
+task :@issue do
+  Cucumber::Rake::Task.new :issue do |t|
+    t.profile = 'default'
+    sh 'cucumber --tags @issue --format PrettyFace::Formatter::Html --out test_reports/issue.html'
+  end
+end
+
 # the execute default for the clean.
 task(:default).clear
 

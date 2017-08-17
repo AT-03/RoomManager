@@ -1,13 +1,11 @@
 # Author: Daniel Cabero
-@crud
 Feature: CRUD, Post request  exchanges meeting
-
+  @crud @positive @meetings
   Scenario: : Create a exchanges meeting
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -27,8 +25,8 @@ Feature: CRUD, Post request  exchanges meeting
 
     And I execute the request
     Then I expect a '200' status code
-    And the response should be:
-      """
+    And a response body excluide as:
+    """
       {
         "subject": "Scrum",
         "body": "Scrum of Room Manager",
@@ -43,3 +41,4 @@ Feature: CRUD, Post request  exchanges meeting
         ]
       }
       """
+

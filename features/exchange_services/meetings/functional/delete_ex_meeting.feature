@@ -5,9 +5,8 @@ Feature: FUNCTIONAL, delete request with different cases.
   Background: Creation exchanges meeting for before delete request.
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -27,55 +26,26 @@ Feature: FUNCTIONAL, delete request with different cases.
     And I execute the request
     And I store the '_id' as '{meetingId}'
 
-  Scenario : Delete expecific exchanges meeting
+  Scenario: Delete expecific exchanges meeting
     When I make a 'DELETE' request to '/meetings/{meetingId}'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I execute the request
     Then I expect a '200' status code
 
   Scenario: Delete exchanges meeting with meetingId invalid
     When I make a 'DELETE' request to '/meetings/meetingInvalid'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I execute the request
     Then I expect a '400' status code
 
-  Scenario: Delete exchanges meeting with meetingId invalid and invalid meeting id
+  Scenario: Delete exchanges meeting with meetingId invalid and invalid exchange credential
     When I make a 'DELETE' request to '/meetings/meetingInvalid'
     And I set this headers exchange:
-      | Content-type         | application/json  |
-      | Exchange-Credentials | credentialInvalid |
-      | Exchange-Calendar    | mail_account      |
+      | Exchange-Credentials | Env.invalid_credential |
+      | Exchange-Calendar    | Env.user_mail          |
     And I execute the request
     Then I expect a '400' status code
-
-
-  Scenario Outline : Delete exchanges meeting
-    When I make a 'DELETE' request to '/meetings/<serviceId>'
-    Examples:
-      | serviceId        |
-      | {meetingId}      |
-      | {meetingInvalid} |
-      | {meetingInvalid} |
-    And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | <credential>     |
-      | Exchange-Calendar    | mail_account     |
-    Examples:
-      | credential        |
-      | credentialId      |
-      | credentialId      |
-      | credentialInvalid |
-    And I execute the request
-
-    Then I expect a '<status_code>' status code
-    Examples:
-      | status_code |
-      | 200         |
-      | 400         |
-      | 400         |
