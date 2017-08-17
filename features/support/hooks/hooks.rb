@@ -8,7 +8,7 @@ Before do
   data_base_rm = Env.data_base_rm
 
   $db_es = Mongodb.new(host_port, data_base_es)
-  @db_rm = Mongodb.new(host_port, data_base_rm)
+  $db_rm = Mongodb.new(host_port, data_base_rm)
 
   Hooks_helper.request_post_hook(method, 'subscriptions', 'host', Env.key_header_es.to_sym,
                                  Helper.encode_credentials(Env.user_password),
@@ -23,18 +23,18 @@ end
 # Delete all meetings
 Before('@delete_meetings') do
   $db_es.drop 'meetings'
-  @db_rm.drop 'meetings'
+  $db_rm.drop 'meetings'
 end
 
 # Delete services
 Before('@delete_services') do
   $db_es.drop 'services'
-  @db_rm.drop 'services'
+  $db_rm.drop 'services'
 end
 
 # Delete rooms
 Before('@delete_rooms') do
-  @db_rm.drop 'rooms'
+  $db_rm.drop 'rooms'
 end
 
 # Author Juan Aitken
@@ -46,6 +46,6 @@ end
 # Close Database
 After do
   $db_es.close_connection
-  @db_rm.close_connection
+  $db_rm.close_connection
 end
 
