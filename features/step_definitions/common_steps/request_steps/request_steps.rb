@@ -21,9 +21,7 @@ end
 
 When(/^I execute the request$/) do
   @http.build_url
-
   @json = RequestManager.execute_request(@http)
-
 end
 
 Then(/^I expect a '(\d+)' status code$/) do |status_code_expected|
@@ -42,7 +40,6 @@ end
 Then(/^I store the '(_?\w+)' as '(?:.+)'$/) do |key|
   @value = Helper.get_value(key, @json.body)
   @key = key
-
 end
 
 # Author: Daniel Montecinos
