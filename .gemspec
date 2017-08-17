@@ -1,5 +1,7 @@
-# autor Daniel Cabero
+# Daniel Cabero
 # coding: utf-8
+# this class should be the execute rakefile.
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 Gem::Specification.new do |spec|

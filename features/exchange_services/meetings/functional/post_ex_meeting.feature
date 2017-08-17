@@ -5,9 +5,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting without attendees
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -23,8 +22,8 @@ Feature: FUNCTIONAL, post the exchange meeting
     And I execute the request
     And I store the '_id' as '{meetingId}'
     Then I expect a '200' status code
-    And the response should be:
-      """
+    And a response body excluide as:
+    """
       {
         "subject": "Scrum",
         "body": "Scrum of Room Manager",
@@ -40,9 +39,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting without attendees empty
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -57,13 +55,20 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+      """
+            {
+              "name": "SchemaValidationError",
+              "description": "data should have required property 'attendees'"
+            }
+          """
 
+    @negative @meetings
   Scenario: Create a exchanges meeting with attendeers delete
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -76,13 +81,21 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+    """
+            {
+              "name": "SchemaValidationError",
+              "description": "data should have required property 'attendees'"
+            }
+          """
 
+
+    @positive @meetings
   Scenario: Create a exchanges meeting with invalid attendees
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -97,8 +110,8 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
     And I execute the request
     Then I expect a '200' status code
-    And the response should be:
-    """
+    And a response body excluide as:
+       """
       {
         "subject": "Scrum",
         "body": "Scrum of Room Manager",
@@ -113,9 +126,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting with invalid Optional attendees
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -130,7 +142,7 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
     And I execute the request
     Then I expect a '200' status code
-    And the response should be:
+    And a response body excluide as:
     """
       {
         "subject": "Scrum",
@@ -143,12 +155,12 @@ Feature: FUNCTIONAL, post the exchange meeting
       }
       """
 
+
   Scenario: Create a exchanges meeting with attendeers delete
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -161,13 +173,18 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
     And I execute the request
     Then I expect a '400' status code
-
+    And a response body as:
+          """
+            {
+              "name": "SchemaValidationError",
+              "description": "data should have required property 'attendees'"
+            }
+          """
   Scenario: Create a exchanges meeting with invalid exchanges credential
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json  |
-      | Exchange-Credentials | credentialInvalid |
-      | Exchange-Calendar    | mail_account      |
+      | Exchange-Credentials | Env.invalid_credential    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -182,13 +199,19 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+        """{
+          "name": "UnauthorizedExchangeError",
+          "description": "The provided credentials are incorrect."
+          }
+      """
 
+  @negative@meetings
   Scenario: Create a exchanges meeting with invalid exchanges calendar
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json     |
-      | Exchange-Credentials | credentialId         |
-      | Exchange-Calendar    | mail_account_invalid |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.invalid_exchange   |
     And I set this body:
       """
       {
@@ -203,13 +226,20 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
     And I execute the request
     Then I expect a '400' status code
+    And a response body as:
+    """
+        {
+        "name": "UnauthorizedExchangeError",
+        "description": "The provided credentials are incorrect."
+        }
+    """
 
+  @negative @meetings
   Scenario: Create a exchanges meeting with date incorrect(02/30)
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
       """
       {
@@ -224,7 +254,7 @@ Feature: FUNCTIONAL, post the exchange meeting
       """
     And I execute the request
     Then I expect a '400' status code
-    And the response should be:
+    And a response body as:
         """
            {
             "name": "ExchangeError",
@@ -232,12 +262,12 @@ Feature: FUNCTIONAL, post the exchange meeting
            }
         """
 
+  @negative @meetings
   Scenario: Create a exchanges meeting without subject and body empty
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
         """
         {
@@ -257,7 +287,7 @@ Feature: FUNCTIONAL, post the exchange meeting
 
     And I execute the request
     Then I expect a '400' status code
-    And the response should be:
+    And a response body as:
         """
           "name": "SchemaValidationError",
           "description": "data.start should match format \"date-time\""

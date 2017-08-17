@@ -5,9 +5,8 @@ Feature: CRUD, put request with different endpoints.
   Background: :  Create a exchanges meeting
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | Env.password    |
+      | Exchange-Calendar    | Env.user_mail   |
     And I set this body:
         """
         {
@@ -29,13 +28,12 @@ Feature: CRUD, put request with different endpoints.
 
   Scenario: Update expecific exchanges meeting
     When I make a 'PUT' request to '/meetings/{meetingId}'
-    And I set this headers exchange:
-      | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
-    And I set this body:
-      """
-        {
+      And I set this headers exchange:
+        | Exchange-Credentials | Env.password    |
+        | Exchange-Calendar    | Env.user_mail   |
+      And I set this body:
+       """
+          {
           "subject": "Scrum",
           "body": "Scrum of Room Manager",
           "start": "2017-10-25T16:00:00.00Z",
@@ -47,15 +45,14 @@ Feature: CRUD, put request with different endpoints.
           "optionalAttendees": [
           "stacy.hirano@server.lab"
           ]
-        }
-        """
+          }
+          """
 
     And I execute the request
     Then I expect a '200' status code
-    And the response should be:
-
-      """
-        {
+    And a response body excluide as:
+    """
+          {
           "subject": "Scrum",
           "body": "Scrum of Room Manager",
           "start": "2017-10-25T16:00:00.00Z",
@@ -67,6 +64,5 @@ Feature: CRUD, put request with different endpoints.
           "optionalAttendees": [
           "stacy.hirano@server.lab"
           ]
-        }
-      """
-
+          }
+          """

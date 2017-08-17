@@ -1,7 +1,7 @@
 # Author: Daniel Cabero
-@smoke
-Feature: SMOKE, GET request to all exchanges meetings
 
+Feature: SMOKE, GET request to all exchanges meetings
+  @delete_meetings @smoke @meetings
   Scenario: Retrieve all the created  exchanges meetings
     Given I make a 'GET' request to '/meetings'
     And I set this queries:
@@ -9,8 +9,8 @@ Feature: SMOKE, GET request to all exchanges meetings
       | end   | 2019-09-31T23:59:59.000Z |
     And I set this headers exchange:
       | Content-type         | application/json |
-      | Exchange-Credentials | credentialId     |
-      | Exchange-Calendar    | mail_account     |
+      | Exchange-Credentials | 'Env.password'     |
+      | Exchange-Calendar    | 'Env.user_mail'    |
     When I execute the request
     Then I expect a '200' status code
     And the JSON should be:
