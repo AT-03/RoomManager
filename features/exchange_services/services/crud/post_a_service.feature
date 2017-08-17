@@ -8,11 +8,12 @@ Feature: CRUD - Create a new service, using a valid 'hostname' with valid creden
       And I set this body:
           """
            {
-             "hostname": "10.28.124.134",
-             "username": "Administrator",
-             "password": "ABC123}"
+             "hostname": "Env.hostname",
+             "username": "Env.user",
+             "password": "Env.password"
            }
           """
+    And I replace the values of the body request
     When I execute the request
     Then I expect a '200' status code
       And a response body as:

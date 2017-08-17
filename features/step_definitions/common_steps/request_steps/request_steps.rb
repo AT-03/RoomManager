@@ -21,9 +21,7 @@ end
 
 When(/^I execute the request$/) do
   @http.build_url
-  p @http
   @json = RequestManager.execute_request(@http)
-  p @json.body
 end
 
 Then(/^I expect a '(\d+)' status code$/) do |status_code_expected|
@@ -107,7 +105,7 @@ end
 # Daniel Montecinos
 And(/^I replace the values of the body request$/) do
   @body.map do |key, value|
-    @body[key] = eval(value) if value.eql?(String)
+  @body[key] = eval(value) if value.instance_of?(String)
   end
   @http.add_body(@body.to_json)
 end

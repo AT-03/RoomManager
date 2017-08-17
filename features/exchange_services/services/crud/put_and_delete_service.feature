@@ -7,11 +7,12 @@ Feature: CRUD - Update an existing service
       And I set this body:
          """
           {
-            "hostname": "10.28.124.134",
-            "username": "Administrator",
-            "password": "ABC123}"
+            "hostname": "Env.hostname",
+            "username": "Env.user",
+            "password": "Env.password"
           }
          """
+      And I replace the values of the body request
     When I execute the request
      And I store the '_id' as '{serviceId}'
 
@@ -21,8 +22,8 @@ Feature: CRUD - Update an existing service
           And I set this body:
       """
        {
-          "username": "Juan",
-          "password": "ABC123}"
+          "username": "Juan Aitken",
+          "password": "P@ssw0rd"
         }
       """
     When  I load exchange server credentials

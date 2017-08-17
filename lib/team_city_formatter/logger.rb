@@ -80,26 +80,7 @@ module TeamCityFormatter
     def json_print(s)
 
 
-      puts ">>>>>#{s.to_s
-                       .gsub("JSON","")
-                        .gsub("equivalent","")
-                        .gsub('0m','')
-                       .gsub('@@','')
-                        .gsub('\n','')
-                        .gsub('\e','')
-                        .gsub('[','')
-                        .gsub('Diff:','')
-                        .gsub('Expected','')
-                        .gsub('34m','')
-                        .gsub('-4,6','')
-                        .gsub('+4,6','')
-                        .gsub('31m-','')
-                        .gsub('32m+','')
 
-
-
-
-      }"
 
 
 

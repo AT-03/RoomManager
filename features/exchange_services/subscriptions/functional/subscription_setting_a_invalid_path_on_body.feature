@@ -1,7 +1,7 @@
 #Author: Juan Aitken
 @functional @negative
 Feature: FUNCTIONAL negative scenarios for 'subscriptions' service
-
+  @delete_subscriptions
   Scenario Outline:  POST request setting a integer as 'host'
 
     Given I make a 'POST' request to '/subscriptions'

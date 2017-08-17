@@ -1,5 +1,5 @@
 #Author: Juan Aitken
-@smoke @test
+@functional @negative
 Feature: SMOKE, GET request to /meetings service
 
   Scenario Outline:
