@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
   <head>
-    <link href='../../../../stylesheets/style.css' type='text/css' rel='stylesheet' />
+    <link href='<%= File.dirname(__dir__)+"/templates" %>/style.css' type='text/css' rel='stylesheet' />
     <meta charset="utf-8">
     <title>Feature Results</title>
   </head>
@@ -12,7 +12,7 @@
 
     <div style="float:left; clear:both;">
       <div class="header_logo">
-        <img src="../../../../images/logo.png" width="250" />
+        <img src="<%=File.dirname(__FILE__)%>/<%= logo %>" width="250" />
       </div>
       <div>
 
@@ -45,11 +45,11 @@
          <tr>
           <th>Summary</th>
           <th>Executed</th>
-					 <th class="passed"><img src="../../../../images/table_passed.png"> Passed</th>
-					 <th class="failed"><img src="../../../../images/table_failed.png">Failed</th>
-					 <th class="skipped"><img src="../../../../images/table_skipped.png">Skipped</th>
-					 <th class="undefined"><img src="../../../../images/table_undefined.png">Undefined</th>
-					 <th class="pending"><img src="../../../../images/table_pending.png">Pending</th>
+	  <th class="passed"><%= raw(feature.table_image_for('passed', feature.file)) %> Passed</th>
+          <th class="failed"><%= raw(feature.table_image_for('failed', feature.file)) %> Failed</th>
+          <th class="skipped"><%= raw(feature.table_image_for('skipped', feature.file)) %> Skipped</th>
+          <th class="undefined"><%= raw(feature.table_image_for('undefined', feature.file)) %> Undefined</th>
+          <th class="pending" ><%= raw(feature.table_image_for('pending', feature.file)) %> Pending</th>
           <th>Average Duration</th>
         </tr>
 
