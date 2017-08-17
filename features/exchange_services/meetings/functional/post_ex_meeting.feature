@@ -5,8 +5,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting without attendees
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -39,8 +39,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting without attendees empty
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -63,12 +63,12 @@ Feature: FUNCTIONAL, post the exchange meeting
             }
           """
 
-    @negative @meetings
+  @negative @meetings
   Scenario: Create a exchanges meeting with attendeers delete
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -90,12 +90,12 @@ Feature: FUNCTIONAL, post the exchange meeting
           """
 
 
-    @positive @meetings
+  @positive @meetings
   Scenario: Create a exchanges meeting with invalid attendees
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -126,8 +126,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting with invalid Optional attendees
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -159,8 +159,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting with attendeers delete
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -180,11 +180,12 @@ Feature: FUNCTIONAL, post the exchange meeting
               "description": "data should have required property 'attendees'"
             }
           """
+
   Scenario: Create a exchanges meeting with invalid exchanges credential
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.invalid_credential    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.invalid_credential |
+      | Exchange-Calendar    | Env.user_mail          |
     And I set this body:
       """
       {
@@ -210,8 +211,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting with invalid exchanges calendar
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.invalid_exchange   |
+      | Exchange-Credentials | Env.password         |
+      | Exchange-Calendar    | Env.invalid_exchange |
     And I set this body:
       """
       {
@@ -238,8 +239,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting with date incorrect(02/30)
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
       """
       {
@@ -266,8 +267,8 @@ Feature: FUNCTIONAL, post the exchange meeting
   Scenario: Create a exchanges meeting without subject and body empty
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {

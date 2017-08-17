@@ -1,5 +1,4 @@
 # Author: Daniel Cabero
-
 Feature: CRUD, Post request  exchanges meeting
   @crud @positive @meetings
   Scenario: : Create a exchanges meeting

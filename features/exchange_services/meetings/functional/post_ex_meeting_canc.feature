@@ -5,8 +5,8 @@ Feature: FUNCTIONAL, post cancelation request with different option.
   Background: Creation exchanges meeting for before cancelation with the post request.
     Given I make a 'POST' request to '/meetings'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -29,8 +29,8 @@ Feature: FUNCTIONAL, post cancelation request with different option.
   Scenario:post cancelation request with location empty.
     When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
     And I set this headers:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
         """
         {
@@ -55,8 +55,8 @@ Feature: FUNCTIONAL, post cancelation request with different option.
   Scenario: post cancelation request without body
     When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
           """
           {
@@ -72,8 +72,8 @@ Feature: FUNCTIONAL, post cancelation request with different option.
   Scenario: post cancelation request with meetingId invalid
     When I make a 'POST' request to '/meetings/meetingInvalid/cancellation'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
           """
             {
@@ -97,8 +97,8 @@ Feature: FUNCTIONAL, post cancelation request with different option.
   Scenario: post cancelation request with date incorrect(29/02)
     When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
           """
             {
@@ -123,8 +123,8 @@ Feature: FUNCTIONAL, post cancelation request with different option.
   Scenario: post cancelation request with date empty
     When I make a 'POST' request to '/meetings/{meetingId1}/cancellation'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
           """
             {
@@ -146,12 +146,11 @@ Feature: FUNCTIONAL, post cancelation request with different option.
     Then I expect a '400' status code
 
 
-
   Scenario: post cancelation request with body empty
     When I make a 'POST' request to '/meetings/{meetingId1}/cancellation'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.password    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.password  |
+      | Exchange-Calendar    | Env.user_mail |
     And I set this body:
           """
             {
@@ -172,8 +171,8 @@ Feature: FUNCTIONAL, post cancelation request with different option.
   Scenario: post cancelation request with exchange credential invalid
     When I make a 'POST' request to '/meetings/{meetingId}/cancellation'
     And I set this headers exchange:
-      | Exchange-Credentials | Env.invalid_credential    |
-      | Exchange-Calendar    | Env.user_mail   |
+      | Exchange-Credentials | Env.invalid_credential |
+      | Exchange-Calendar    | Env.user_mail          |
     And I set this body:
           """
             {

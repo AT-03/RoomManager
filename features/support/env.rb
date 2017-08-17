@@ -153,16 +153,16 @@ class Env
   def self.user_mail
     config = load_file
     config['user']['mail']
-    end
+  end
 
   # this method is for the negative test.
   def self.invalid_credential
     config = load_file
     config['invalid']['credential']
-    end
+  end
 
   def self.invalid_exchange
-  config = load_file
+    config = load_file
     config['invalid']['user']
   end
 

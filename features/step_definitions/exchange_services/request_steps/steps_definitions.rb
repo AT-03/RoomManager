@@ -9,7 +9,7 @@ include RSpec::Matchers
 And(/^I load headers exchanges$/) do
   @user = Env.user_mail
   @credential= Helper.encode_credentials(Env.user_password)
-  @http.add_header_field('Exchange-Calendar',@user)
+  @http.add_header_field('Exchange-Calendar', @user)
   @http.add_header_field('Exchange-Credentials', @credential)
 
 end
@@ -26,7 +26,7 @@ And(/^the response should be:$/) do |json|
 end
 
 And(/^I load headers exchanges incorrect$/) do
-  @http.add_header_field('Exchange-Calendar','')
+  @http.add_header_field('Exchange-Calendar', '')
   @http.add_header_field('Exchange-Credentials', '')
 end
 
@@ -34,14 +34,12 @@ end
 # this method is the get the credential and mail user(administrator) whitout jar code.
 def value_header(value)
   @value= eval (value) if value.eql String
- end
+end
 
 And(/^I set this headers exchange:$/) do |headers|
-
-  headers.rows_hash.each { |key, value|
+  headers.rows_hash.each {|key, value|
     @http.add_header_field(key, value_header(value))}
   @http.change_header_key('Credentials', 'Exchange-Credentials')
-
 end
 
 And(/^a response body excluide as:$/) do |body_expected|

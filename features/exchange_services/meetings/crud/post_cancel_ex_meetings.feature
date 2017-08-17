@@ -1,5 +1,5 @@
 # Author: Daniel Cabero
-@crud
+@crud @meetings
 Feature: CRUD, post request for cancelation exchange meeting
 
   Background:  Create a exchanges meeting

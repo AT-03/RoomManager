@@ -25,7 +25,7 @@ Feature: CRUD, put request with different endpoints.
         """
     And I execute the request
     And I store the '_id' as '{meetingId}'
-
+@crud @meetings
   Scenario: Update expecific exchanges meeting
     When I make a 'PUT' request to '/meetings/{meetingId}'
       And I set this headers exchange:

@@ -130,7 +130,7 @@ Feature: FUNCTIONAL, put request for different cases.
             }
           """
 
-@negative @meetings
+  @negative @meetings
   Scenario:put request with empty body.
     When I make a 'PUT' request to '/meetings/{meetingId}'
     And I set this headers exchange:
